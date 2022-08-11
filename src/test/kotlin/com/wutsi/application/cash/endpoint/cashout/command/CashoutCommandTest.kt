@@ -86,7 +86,7 @@ internal class CashoutCommandTest : AbstractEndpointTest() {
         val error = getText("prompt.error.unexpected-error")
         assertEquals(ActionType.Route, action.type)
         assertEquals(
-            "http://localhost:0/transaction/error?type=CASHOUT&payment-token=xxx&error=" + URLEncoder.encode(
+            "http://localhost:0/transaction/error?type=CASHOUT&amount=10000.0&payment-token=xxx&error=" + URLEncoder.encode(
                 error,
                 "utf-8"
             ),

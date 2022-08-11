@@ -11,5 +11,6 @@
 
   <root>
     <appender-ref ref="CONSOLE"/>
+    <appender-ref ref="SLACK"/>
   </root>
 </configuration>

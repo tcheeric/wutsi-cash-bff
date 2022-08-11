@@ -41,7 +41,7 @@ class CashoutCommand(
             val error = getErrorText(ex)
             return gotoUrl(
                 url = urlBuilder.build(
-                    "transaction/error?type=CASHOUT&payment-token=$paymentToken&error=" + encodeURLParam(
+                    "transaction/error?type=CASHOUT&amount=$amount&payment-token=$paymentToken&error=" + encodeURLParam(
                         error
                     )
                 )
