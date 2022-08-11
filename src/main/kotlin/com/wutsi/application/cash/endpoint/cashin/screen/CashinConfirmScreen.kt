@@ -2,7 +2,6 @@ package com.wutsi.application.cash.endpoint.cashin.screen
 
 import com.wutsi.application.cash.endpoint.AbstractQuery
 import com.wutsi.application.cash.endpoint.Page
-import com.wutsi.application.cash.service.IdempotencyKeyGenerator
 import com.wutsi.application.shared.Theme
 import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.flutter.sdui.Action
@@ -37,14 +36,14 @@ import java.text.DecimalFormat
 class CashinConfirmScreen(
     private val tenantProvider: TenantProvider,
     private val accountApi: WutsiAccountApi,
-    private val idempotencyKeyGenerator: IdempotencyKeyGenerator,
 
     @Value("\${wutsi.application.login-url}") private val loginUrl: String,
 ) : AbstractQuery() {
     @PostMapping
     fun index(
         @RequestParam amount: Double,
-        @RequestParam("payment-token") paymentToken: String
+        @RequestParam("payment-token") paymentToken: String,
+        @RequestParam("idempotency-key") idempotencyKey: String,
     ): Widget {
         val accountId = securityContext.currentAccountId()
         val tenant = tenantProvider.get()
@@ -116,7 +115,7 @@ class CashinConfirmScreen(
                                 ),
                                 action = Action(
                                     type = ActionType.Route,
-                                    url = urlBuilder.build(loginUrl, getSubmitUrl(amount, paymentToken))
+                                    url = urlBuilder.build(loginUrl, getSubmitUrl(amount, paymentToken, idempotencyKey))
                                 )
                             )
                         )
@@ -126,7 +125,7 @@ class CashinConfirmScreen(
         ).toWidget()
     }
 
-    private fun getSubmitUrl(amount: Double, paymentToken: String): String {
+    private fun getSubmitUrl(amount: Double, paymentToken: String, idempotencyKey: String): String {
         val me = accountApi.getAccount(securityContext.currentAccountId()).account
         return "?phone=" + encodeURLParam(me.phone!!.number) +
             "&dark-mode=true" +
@@ -139,7 +138,7 @@ class CashinConfirmScreen(
             "&return-url=" + encodeURLParam(
             urlBuilder.build(
                 "commands/cashin?amount=$amount&payment-token=$paymentToken" +
-                    "&idempotency-key=" + idempotencyKeyGenerator.generate()
+                    "&idempotency-key=$idempotencyKey"
             )
         )
     }

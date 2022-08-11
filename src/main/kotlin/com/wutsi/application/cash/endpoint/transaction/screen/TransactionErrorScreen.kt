@@ -3,6 +3,7 @@ package com.wutsi.application.cash.endpoint.transaction.screen
 import com.wutsi.application.cash.endpoint.Page
 import com.wutsi.application.shared.Theme
 import com.wutsi.application.shared.service.TenantProvider
+import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Screen
 import com.wutsi.flutter.sdui.Widget
@@ -41,7 +42,10 @@ class TransactionErrorScreen(
         return Screen(
             id = Page.TRANSACTION_ERROR,
             backgroundColor = Theme.COLOR_GRAY_LIGHT,
-            appBar = null,
+            appBar = AppBar(
+                backgroundColor = Theme.COLOR_GRAY_LIGHT,
+                foregroundColor = Theme.COLOR_BLACK
+            ),
             safe = true,
             child = Column(
                 children = listOf(

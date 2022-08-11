@@ -2,6 +2,7 @@ package com.wutsi.application.cash.endpoint.cashin.command
 
 import com.wutsi.application.cash.endpoint.AbstractCommand
 import com.wutsi.application.cash.endpoint.cashin.dto.CashinRequest
+import com.wutsi.application.cash.service.IdempotencyKeyGenerator
 import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.platform.tenant.dto.Tenant
@@ -16,6 +17,7 @@ import javax.validation.Valid
 @RequestMapping("/commands/cashin/amount")
 class CashinAmountCommand(
     private val tenantProvider: TenantProvider,
+    private val idempotencyKeyGenerator: IdempotencyKeyGenerator
 ) : AbstractCommand() {
     @PostMapping
     fun index(@RequestBody @Valid request: CashinRequest): Action {
@@ -28,9 +30,10 @@ class CashinAmountCommand(
         if (error != null)
             return error
 
-        // Cashin
+        // Cash-in
+        val idempotencyKey = idempotencyKeyGenerator.generate()
         return gotoUrl(
-            url = urlBuilder.build("cashin/confirm?amount=${request.amount}&payment-token=${request.paymentToken}")
+            url = urlBuilder.build("cashin/confirm?amount=${request.amount}&payment-token=${request.paymentToken}&idempotency-key=$idempotencyKey")
         )
     }
 

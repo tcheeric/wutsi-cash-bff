@@ -166,5 +166,13 @@
         }
       ]
     }
-  ]
+  ],
+  "appBar": {
+    "type": "AppBar",
+    "attributes": {
+      "backgroundColor": "#e8e8e8",
+      "foregroundColor": "#000000"
+    },
+    "children": []
+  }
 }

@@ -27,12 +27,15 @@ internal class CashinConfirmScreenTest : AbstractEndpointTest() {
     private lateinit var url: String
     private val amount = 5000.0
     private val fees = 50.0
+    private val idempotencyKey = "11111-111111-222222-2222"
+    private val token = "xxx"
 
     @BeforeEach
     override fun setUp() {
         super.setUp()
 
-        url = "http://localhost:$port/cashin/confirm?amount=$amount&payment-token=4304309409"
+        url =
+            "http://localhost:$port/cashin/confirm?amount=$amount&payment-token=$token&idempotency-key=$idempotencyKey"
 
         doReturn("123").whenever(idempotencyKeyGenerator).generate()
     }
