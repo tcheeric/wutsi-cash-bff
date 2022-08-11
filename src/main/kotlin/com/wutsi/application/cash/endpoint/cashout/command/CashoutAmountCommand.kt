@@ -2,6 +2,7 @@ package com.wutsi.application.cash.endpoint.cashout.command
 
 import com.wutsi.application.cash.endpoint.AbstractCommand
 import com.wutsi.application.cash.endpoint.cashout.dto.CashoutRequest
+import com.wutsi.application.cash.service.IdempotencyKeyGenerator
 import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.Dialog
@@ -20,6 +21,7 @@ import javax.validation.Valid
 @RequestMapping("/commands/cashout/amount")
 class CashoutAmountCommand(
     private val tenantProvider: TenantProvider,
+    private val idempotencyKeyGenerator: IdempotencyKeyGenerator,
 ) : AbstractCommand() {
     @PostMapping
     fun index(@RequestBody @Valid request: CashoutRequest): Action {
@@ -32,9 +34,10 @@ class CashoutAmountCommand(
         if (error != null)
             return error
 
-        // Cashout
+        // Cash-out
+        val idempotencyKey = idempotencyKeyGenerator.generate()
         return gotoUrl(
-            url = urlBuilder.build("cashout/confirm?amount=${request.amount}&payment-token=${request.paymentToken}")
+            url = urlBuilder.build("cashout/confirm?amount=${request.amount}&payment-token=${request.paymentToken}&idempotency-key=$idempotencyKey")
         )
     }
 

@@ -134,6 +134,7 @@ class CashinConfirmScreen(
             "&title=" + encodeURLParam(getText("page.cashin-pin.title")) +
             "&sub-title=" + encodeURLParam(getText("page.cashin-pin.sub-title")) +
             "&auth=false" +
+            "&dark-more=true" +
             "&return-to-route=false" +
             "&return-url=" + encodeURLParam(
             urlBuilder.build(

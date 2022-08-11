@@ -5,6 +5,7 @@ import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.whenever
 import com.wutsi.application.cash.endpoint.AbstractEndpointTest
 import com.wutsi.application.cash.endpoint.cashout.dto.CashoutRequest
+import com.wutsi.application.cash.service.IdempotencyKeyGenerator
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.enums.ActionType
 import com.wutsi.flutter.sdui.enums.DialogType
@@ -13,6 +14,7 @@ import com.wutsi.platform.payment.dto.CreateCashinResponse
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.boot.test.web.server.LocalServerPort
 import kotlin.test.assertEquals
 
@@ -24,12 +26,21 @@ internal class CashoutAmountCommandTest : AbstractEndpointTest() {
     private lateinit var url: String
     private lateinit var request: CashoutRequest
 
+    @MockBean
+    private lateinit var idempotencyKeyGenerator: IdempotencyKeyGenerator
+
+    private val idempotencyKey = "11111-111111-222222-2222"
+    private val amount = 15000.0
+    private val token = "xxx"
+
     @BeforeEach
     override fun setUp() {
         super.setUp()
 
         url = "http://localhost:$port/commands/cashout/amount"
-        request = CashoutRequest(paymentToken = "xxx", amount = 10000.0)
+        request = CashoutRequest(paymentToken = token, amount = amount)
+
+        doReturn(idempotencyKey).whenever(idempotencyKeyGenerator).generate()
     }
 
     @Test
@@ -46,7 +57,10 @@ internal class CashoutAmountCommandTest : AbstractEndpointTest() {
 
         val action = response.body!!
         assertEquals(ActionType.Route, action.type)
-        assertEquals("http://localhost:0/cashout/confirm?amount=10000.0&payment-token=xxx", action.url)
+        assertEquals(
+            "http://localhost:0/cashout/confirm?amount=$amount&payment-token=$token&idempotency-key=$idempotencyKey",
+            action.url
+        )
     }
 
     @Test

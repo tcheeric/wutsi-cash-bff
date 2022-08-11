@@ -4,7 +4,6 @@ import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.whenever
 import com.wutsi.application.cash.endpoint.AbstractEndpointTest
-import com.wutsi.application.cash.service.IdempotencyKeyGenerator
 import com.wutsi.platform.account.dto.GetPaymentMethodResponse
 import com.wutsi.platform.account.dto.PaymentMethod
 import com.wutsi.platform.account.dto.Phone
@@ -13,7 +12,6 @@ import com.wutsi.platform.payment.dto.TransactionFee
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.boot.test.web.server.LocalServerPort
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -23,19 +21,17 @@ internal class CashoutConfirmScreenTest : AbstractEndpointTest() {
 
     private lateinit var url: String
 
-    @MockBean
-    private lateinit var idempotencyKeyGenerator: IdempotencyKeyGenerator
-
     val amount = 1000.0
     val fees = 20.0
+    private val idempotencyKey = "11111-111111-222222-2222"
+    private val token = "xxx"
 
     @BeforeEach
     override fun setUp() {
         super.setUp()
 
-        url = "http://localhost:$port/cashout/confirm?amount=$amount&payment-token=4304309409"
-
-        doReturn("123").whenever(idempotencyKeyGenerator).generate()
+        url =
+            "http://localhost:$port/cashout/confirm?amount=$amount&payment-token=$token&idempotency-key=$idempotencyKey"
     }
 
     @Test

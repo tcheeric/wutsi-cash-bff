@@ -2,7 +2,6 @@ package com.wutsi.application.cash.endpoint.cashout.screen
 
 import com.wutsi.application.cash.endpoint.AbstractQuery
 import com.wutsi.application.cash.endpoint.Page
-import com.wutsi.application.cash.service.IdempotencyKeyGenerator
 import com.wutsi.application.shared.Theme
 import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.flutter.sdui.Action
@@ -37,14 +36,14 @@ import java.text.DecimalFormat
 class CashoutConfirmScreen(
     private val tenantProvider: TenantProvider,
     private val accountApi: WutsiAccountApi,
-    private val idempotencyKeyGenerator: IdempotencyKeyGenerator,
 
     @Value("\${wutsi.application.login-url}") private val loginUrl: String,
 ) : AbstractQuery() {
     @PostMapping
     fun index(
         @RequestParam amount: Double,
-        @RequestParam("payment-token") paymentToken: String
+        @RequestParam("payment-token") paymentToken: String,
+        @RequestParam("idempotency-key") idempotencyKey: String,
     ): Widget {
         val accountId = securityContext.currentAccountId()
         val tenant = tenantProvider.get()
@@ -116,7 +115,7 @@ class CashoutConfirmScreen(
                                 ),
                                 action = Action(
                                     type = ActionType.Route,
-                                    url = urlBuilder.build(loginUrl, getSubmitUrl(amount, paymentToken))
+                                    url = urlBuilder.build(loginUrl, getSubmitUrl(amount, paymentToken, idempotencyKey))
                                 )
                             )
                         )
@@ -126,7 +125,7 @@ class CashoutConfirmScreen(
         ).toWidget()
     }
 
-    private fun getSubmitUrl(amount: Double, paymentToken: String): String {
+    private fun getSubmitUrl(amount: Double, paymentToken: String, idempotencyKey: String): String {
         val me = securityContext.currentAccount()
         return "?phone=" + encodeURLParam(me.phone!!.number) +
             "&icon=" + Theme.ICON_LOCK +
@@ -134,11 +133,12 @@ class CashoutConfirmScreen(
             "&title=" + encodeURLParam(getText("page.cashout-pin.title")) +
             "&sub-title=" + encodeURLParam(getText("page.cashout-pin.sub-title")) +
             "&auth=false" +
+            "&dark-more=true" +
             "&return-to-route=false" +
             "&return-url=" + encodeURLParam(
             urlBuilder.build(
                 "commands/cashout?amount=$amount&payment-token=$paymentToken" +
-                    "&idempotency-key=" + idempotencyKeyGenerator.generate()
+                    "&idempotency-key=$idempotencyKey"
             )
         )
     }
