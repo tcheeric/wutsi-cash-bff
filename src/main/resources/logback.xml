@@ -5,7 +5,7 @@
 
   <appender name="SLACK" class="com.wutsi.platform.core.logging.SlackAppender">
     <layout class="ch.qos.logback.classic.PatternLayout">
-      <Pattern>%d app=wutsi-payment-server type=%level logger=%class{20} thread=%thread %m%n</Pattern>
+      <Pattern>%d app=wutsi-cash-bff type=%level logger=%class{20} thread=%thread %m%n</Pattern>
     </layout>
   </appender>
 
