@@ -3,7 +3,6 @@ package com.wutsi.application.cash.endpoint.cashin.command
 import com.wutsi.application.cash.endpoint.AbstractCommand
 import com.wutsi.application.cash.endpoint.cashin.dto.CashinRequest
 import com.wutsi.application.cash.service.IdempotencyKeyGenerator
-import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.platform.tenant.dto.Tenant
 import org.springframework.web.bind.annotation.PostMapping
@@ -16,7 +15,6 @@ import javax.validation.Valid
 @RestController
 @RequestMapping("/commands/cashin/amount")
 class CashinAmountCommand(
-    private val tenantProvider: TenantProvider,
     private val idempotencyKeyGenerator: IdempotencyKeyGenerator
 ) : AbstractCommand() {
     @PostMapping

@@ -3,7 +3,6 @@ package com.wutsi.application.cash.endpoint.send.screen
 import com.wutsi.application.cash.endpoint.AbstractQuery
 import com.wutsi.application.cash.endpoint.Page
 import com.wutsi.application.shared.Theme
-import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.application.shared.ui.ProfileCard
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.AppBar
@@ -35,7 +34,6 @@ import java.text.DecimalFormat
 @RestController
 @RequestMapping("/send/pending")
 class SendPendingScreen(
-    private val tenantProvider: TenantProvider,
     private val accountApi: WutsiAccountApi,
 ) : AbstractQuery() {
     @PostMapping

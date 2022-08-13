@@ -1,7 +1,6 @@
 package com.wutsi.application.cash.endpoint.send.command
 
 import com.wutsi.application.cash.endpoint.AbstractCommand
-import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.platform.payment.core.Status
 import com.wutsi.platform.payment.dto.CreateTransferRequest
@@ -13,9 +12,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/commands/send")
-class SendCommand(
-    private val tenantProvider: TenantProvider,
-) : AbstractCommand() {
+class SendCommand : AbstractCommand() {
     @PostMapping
     fun index(
         @RequestParam amount: Double,

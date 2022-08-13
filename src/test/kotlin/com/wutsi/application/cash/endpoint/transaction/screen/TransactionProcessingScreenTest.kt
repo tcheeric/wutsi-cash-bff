@@ -9,6 +9,7 @@ import com.wutsi.platform.account.dto.ListPaymentMethodResponse
 import com.wutsi.platform.account.dto.PaymentMethodSummary
 import com.wutsi.platform.account.dto.SearchAccountResponse
 import com.wutsi.platform.payment.PaymentMethodProvider
+import com.wutsi.platform.payment.PaymentMethodType
 import com.wutsi.platform.payment.dto.GetTransactionResponse
 import com.wutsi.platform.payment.dto.Transaction
 import com.wutsi.platform.payment.entity.TransactionType
@@ -32,7 +33,8 @@ internal class TransactionProcessingScreenTest : AbstractEndpointTest() {
     val paymentMethods = listOf(
         PaymentMethodSummary(
             token = paymentToken,
-            provider = PaymentMethodProvider.ORANGE.name
+            provider = PaymentMethodProvider.ORANGE.name,
+            type = PaymentMethodType.MOBILE.name,
         )
     )
 

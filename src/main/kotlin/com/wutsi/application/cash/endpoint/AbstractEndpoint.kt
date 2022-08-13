@@ -7,6 +7,7 @@ import com.wutsi.application.cash.exception.TransactionException
 import com.wutsi.application.shared.Theme
 import com.wutsi.application.shared.service.SecurityContext
 import com.wutsi.application.shared.service.SharedUIMapper
+import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.application.shared.service.TogglesProvider
 import com.wutsi.application.shared.service.URLBuilder
 import com.wutsi.application.shared.ui.BottomNavigationBarWidget
@@ -22,13 +23,16 @@ import com.wutsi.flutter.sdui.enums.ActionType.Route
 import com.wutsi.flutter.sdui.enums.CrossAxisAlignment
 import com.wutsi.flutter.sdui.enums.DialogType.Error
 import com.wutsi.flutter.sdui.enums.MainAxisAlignment
+import com.wutsi.platform.account.dto.PaymentMethod
 import com.wutsi.platform.account.dto.PaymentMethodSummary
 import com.wutsi.platform.core.error.ErrorResponse
 import com.wutsi.platform.core.logging.KVLogger
+import com.wutsi.platform.payment.PaymentMethodType
 import com.wutsi.platform.payment.WutsiPaymentApi
 import com.wutsi.platform.payment.core.ErrorCode
 import com.wutsi.platform.payment.core.Money
 import com.wutsi.platform.payment.dto.TransactionFee
+import com.wutsi.platform.tenant.dto.FinancialInstitution
 import com.wutsi.platform.tenant.dto.MobileCarrier
 import com.wutsi.platform.tenant.dto.Tenant
 import feign.FeignException
@@ -70,6 +74,9 @@ abstract class AbstractEndpoint {
 
     @Autowired
     protected lateinit var objectMapper: ObjectMapper
+
+    @Autowired
+    protected lateinit var tenantProvider: TenantProvider
 
     @ExceptionHandler(Throwable::class)
     fun onException(ex: Throwable): Action {
@@ -179,6 +186,12 @@ abstract class AbstractEndpoint {
             "+$tmp"
     }
 
+    protected fun formattedAccountNumber(paymentMethod: PaymentMethodSummary): String? =
+        if (paymentMethod.type == PaymentMethodType.MOBILE.name)
+            formattedPhoneNumber(paymentMethod.phone?.number, paymentMethod.phone?.country)
+        else
+            paymentMethod.number
+
     protected fun formattedPhoneNumber(phoneNumber: String?, country: String? = null): String? {
         if (phoneNumber == null)
             return null
@@ -190,8 +203,41 @@ abstract class AbstractEndpoint {
     protected fun encodeURLParam(text: String?): String =
         text?.let { URLEncoder.encode(it, "utf-8") } ?: ""
 
-    protected fun getMobileCarrier(paymentMethod: PaymentMethodSummary, tenant: Tenant): MobileCarrier? =
-        tenant.mobileCarriers.findLast { it.code.equals(paymentMethod.provider, true) }
+    protected fun getMobileCarrier(provider: String, tenant: Tenant): MobileCarrier? =
+        tenant.mobileCarriers.findLast { it.code.equals(provider, true) }
+
+    protected fun getFinantialInstitution(provider: String, tenant: Tenant): FinancialInstitution? =
+        tenant.financialInstitutions.findLast { it.code.equals(provider, true) }
+
+    fun getLogoUrl(tenant: Tenant, paymentMethod: PaymentMethodSummary): String? {
+        if (paymentMethod.type == PaymentMethodType.MOBILE.name) {
+            val carrier = getMobileCarrier(paymentMethod.provider, tenant)
+            if (carrier != null) {
+                return tenantProvider.logo(carrier)
+            }
+        } else if (paymentMethod.type == PaymentMethodType.BANK.name) {
+            val financialInstitution = getFinantialInstitution(paymentMethod.provider, tenant)
+            if (financialInstitution != null) {
+                return tenantProvider.logo(financialInstitution)
+            }
+        }
+        return null
+    }
+
+    fun getLogoUrl(tenant: Tenant, paymentMethod: PaymentMethod): String? {
+        if (paymentMethod.type == PaymentMethodType.MOBILE.name) {
+            val carrier = getMobileCarrier(paymentMethod.provider, tenant)
+            if (carrier != null) {
+                return tenantProvider.logo(carrier)
+            }
+        } else if (paymentMethod.type == PaymentMethodType.BANK.name) {
+            val financialInstitution = getFinantialInstitution(paymentMethod.provider, tenant)
+            if (financialInstitution != null) {
+                return tenantProvider.logo(financialInstitution)
+            }
+        }
+        return null
+    }
 
     protected fun getBalance(tenant: Tenant): Money {
         try {

@@ -8,6 +8,8 @@ import com.wutsi.platform.account.dto.AccountSummary
 import com.wutsi.platform.account.dto.ListPaymentMethodResponse
 import com.wutsi.platform.account.dto.PaymentMethodSummary
 import com.wutsi.platform.account.dto.SearchAccountResponse
+import com.wutsi.platform.payment.PaymentMethodProvider
+import com.wutsi.platform.payment.PaymentMethodType
 import com.wutsi.platform.payment.dto.SearchTransactionResponse
 import com.wutsi.platform.payment.dto.TransactionSummary
 import org.junit.jupiter.api.BeforeEach
@@ -44,8 +46,14 @@ internal class HistoryScreenTest : AbstractEndpointTest() {
         doReturn(SearchTransactionResponse(txs)).whenever(paymentApi).searchTransaction(any())
 
         val paymentMethods = listOf(
-            createPaymentMethodSummary("A", "11111"),
-            createPaymentMethodSummary("B", "22222"),
+            createPaymentMethodSummary("A", "11111", "+12379711111"),
+            createPaymentMethodSummary(
+                "B",
+                "22222",
+                "0022222",
+                type = PaymentMethodType.BANK,
+                provider = PaymentMethodProvider.WAF
+            ),
             createPaymentMethodSummary("C", "33333"),
         )
         doReturn(ListPaymentMethodResponse(paymentMethods)).whenever(accountApi).listPaymentMethods(any())
@@ -96,9 +104,18 @@ internal class HistoryScreenTest : AbstractEndpointTest() {
             created = OffsetDateTime.of(2021, 1, 1, 1, 1, 1, 1, ZoneOffset.UTC)
         )
 
-    private fun createPaymentMethodSummary(token: String, maskedNumber: String) = PaymentMethodSummary(
+    private fun createPaymentMethodSummary(
+        token: String,
+        maskedNumber: String,
+        number: String? = null,
+        type: PaymentMethodType = PaymentMethodType.MOBILE,
+        provider: PaymentMethodProvider = PaymentMethodProvider.MTN
+    ) = PaymentMethodSummary(
         token = token,
-        maskedNumber = maskedNumber
+        maskedNumber = maskedNumber,
+        number = number,
+        type = type.name,
+        provider = provider.name
     )
 
     private fun createAccount(id: Long) = AccountSummary(

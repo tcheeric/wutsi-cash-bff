@@ -3,7 +3,6 @@ package com.wutsi.application.cash.endpoint.cashin.screen
 import com.wutsi.application.cash.endpoint.AbstractQuery
 import com.wutsi.application.cash.endpoint.Page
 import com.wutsi.application.shared.Theme
-import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Column
@@ -34,7 +33,6 @@ import java.text.DecimalFormat
 @RestController
 @RequestMapping("/cashin/confirm")
 class CashinConfirmScreen(
-    private val tenantProvider: TenantProvider,
     private val accountApi: WutsiAccountApi,
 
     @Value("\${wutsi.application.login-url}") private val loginUrl: String,
@@ -50,7 +48,6 @@ class CashinConfirmScreen(
         val balance = getBalance(tenant)
         val fmt = DecimalFormat(tenant.monetaryFormat)
         val paymentMethod = accountApi.getPaymentMethod(accountId, paymentToken).paymentMethod
-        val carrier = tenantProvider.mobileCarriers(tenant).find { it.code.equals(paymentMethod.provider, true) }
         val fees = paymentApi.computeFees(
             request = ComputeFeesRequest(
                 transactionType = TransactionType.CASHIN.name,
@@ -82,11 +79,14 @@ class CashinConfirmScreen(
                                         crossAxisAlignment = CrossAxisAlignment.start,
                                         children = listOf(
                                             Icon(
-                                                code = carrier?.let { tenantProvider.logo(it) } ?: "",
+                                                code = getLogoUrl(tenant, paymentMethod) ?: "",
                                                 size = 24.0
                                             ),
                                             Container(padding = 5.0),
-                                            Text(paymentMethod.phone!!.number, size = Theme.TEXT_SIZE_LARGE)
+                                            Text(
+                                                caption = paymentMethod.number ?: paymentMethod.maskedNumber,
+                                                size = Theme.TEXT_SIZE_LARGE
+                                            )
                                         ),
                                     ),
                                     Divider(color = Theme.COLOR_DIVIDER),

@@ -4,7 +4,6 @@ import com.wutsi.application.cash.endpoint.AbstractQuery
 import com.wutsi.application.cash.endpoint.Page
 import com.wutsi.application.shared.Theme
 import com.wutsi.application.shared.service.DateTimeUtil
-import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Column
@@ -44,7 +43,6 @@ import java.time.format.DateTimeFormatter
 @RestController
 @RequestMapping("/transaction")
 class TransactionScreen(
-    private val tenantProvider: TenantProvider,
     private val accountApi: WutsiAccountApi,
 
     @Value("\${wutsi.application.store-url}") private val storeUrl: String
@@ -262,18 +260,16 @@ class TransactionScreen(
         paymentMethods: Map<String, PaymentMethodSummary>,
         tenant: Tenant
     ): WidgetAware {
-        val carrier = tenant.mobileCarriers.find { it.code.equals(tx.paymentMethodProvider, true) }
+        val paymentMethod = paymentMethods[tx.paymentMethodToken]
         return ListItem(
-            caption = paymentMethods[tx.paymentMethodToken]?.phone?.number
-                ?: paymentMethods[tx.paymentMethodToken]?.maskedNumber
+            caption = paymentMethod?.number
+                ?: paymentMethod?.maskedNumber
                 ?: "",
-            leading = carrier?.let {
-                tenantProvider.logo(it)
-            }?.let {
+            leading = paymentMethod?.let {
                 Image(
                     width = 48.0,
                     height = 48.0,
-                    url = it
+                    url = getLogoUrl(tenant, it) ?: ""
                 )
             }
         )

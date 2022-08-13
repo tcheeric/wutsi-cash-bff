@@ -7,6 +7,7 @@ import com.wutsi.application.cash.endpoint.AbstractEndpointTest
 import com.wutsi.platform.account.dto.GetPaymentMethodResponse
 import com.wutsi.platform.account.dto.PaymentMethod
 import com.wutsi.platform.account.dto.Phone
+import com.wutsi.platform.payment.PaymentMethodType
 import com.wutsi.platform.payment.dto.ComputeFeesResponse
 import com.wutsi.platform.payment.dto.TransactionFee
 import org.junit.jupiter.api.BeforeEach
@@ -41,7 +42,9 @@ internal class CashoutConfirmScreenTest : AbstractEndpointTest() {
             paymentMethod = PaymentMethod(
                 token = "xxxxxx",
                 provider = "MTN",
+                type = PaymentMethodType.MOBILE.name,
                 maskedNumber = "xxxx9999",
+                number = "+237670000001",
                 phone = Phone(
                     number = "+237670000001"
                 )

@@ -6,6 +6,8 @@ import com.nhaarman.mockitokotlin2.whenever
 import com.wutsi.application.cash.endpoint.AbstractEndpointTest
 import com.wutsi.platform.account.dto.ListPaymentMethodResponse
 import com.wutsi.platform.account.dto.PaymentMethodSummary
+import com.wutsi.platform.payment.PaymentMethodProvider
+import com.wutsi.platform.payment.PaymentMethodType
 import com.wutsi.platform.payment.dto.Balance
 import com.wutsi.platform.payment.dto.GetBalanceResponse
 import org.junit.jupiter.api.BeforeEach
@@ -35,12 +37,14 @@ internal class CashoutScreenTest : AbstractEndpointTest() {
             paymentMethods = listOf(
                 PaymentMethodSummary(
                     token = "xxxxxx",
-                    provider = "MTN",
+                    provider = PaymentMethodProvider.MTN.name,
+                    type = PaymentMethodType.MOBILE.name,
                     maskedNumber = "xxxx9999"
                 ),
                 PaymentMethodSummary(
                     token = "yyyyy",
-                    provider = "Orange",
+                    provider = PaymentMethodProvider.ORANGE.name,
+                    type = PaymentMethodType.MOBILE.name,
                     maskedNumber = "xxxx1111"
                 )
             )

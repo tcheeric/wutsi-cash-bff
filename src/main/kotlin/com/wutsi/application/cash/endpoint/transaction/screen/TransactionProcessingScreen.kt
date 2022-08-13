@@ -2,7 +2,6 @@ package com.wutsi.application.cash.endpoint.transaction.screen
 
 import com.wutsi.application.cash.endpoint.Page
 import com.wutsi.application.shared.Theme
-import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.flutter.sdui.Center
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
@@ -20,8 +19,7 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/transaction/processing")
 class TransactionProcessingScreen(
     accountApi: WutsiAccountApi,
-    tenantProvider: TenantProvider,
-) : AbstractTransactionStatusScreen(accountApi, tenantProvider) {
+) : AbstractTransactionStatusScreen(accountApi) {
     @PostMapping
     fun index(
         @RequestParam(name = "transaction-id") transactionId: String,
@@ -38,7 +36,7 @@ class TransactionProcessingScreen(
                 children = listOf(
                     toSectionWidget(
                         padding = null,
-                        child = toSection1(tx, tenant)
+                        child = toSectionInfos(tx, tenant)
                     ),
                     toSectionWidget(
                         child = Column(

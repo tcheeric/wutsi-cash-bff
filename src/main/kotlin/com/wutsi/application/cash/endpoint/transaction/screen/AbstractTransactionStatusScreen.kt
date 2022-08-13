@@ -2,7 +2,6 @@ package com.wutsi.application.cash.endpoint.transaction.screen
 
 import com.wutsi.application.cash.endpoint.AbstractQuery
 import com.wutsi.application.shared.Theme
-import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.application.shared.ui.Avatar
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
@@ -22,13 +21,12 @@ import com.wutsi.platform.tenant.dto.Tenant
 
 abstract class AbstractTransactionStatusScreen(
     protected val accountApi: WutsiAccountApi,
-    protected val tenantProvider: TenantProvider,
 ) : AbstractQuery() {
     companion object {
         const val ICON_SIZE = 48.0
     }
 
-    protected fun toSection1(tx: Transaction, tenant: Tenant): WidgetAware =
+    protected fun toSectionInfos(tx: Transaction, tenant: Tenant): WidgetAware =
         Column(
             children = listOf(
                 Container(
@@ -86,16 +84,12 @@ abstract class AbstractTransactionStatusScreen(
             .find { it.token == tx.paymentMethodToken }
             ?: return null
 
-        val carrier = tenantProvider.mobileCarriers(tenant)
-            .find { it.code.equals(paymentMethod.provider, true) }
-            ?: return null
-        val carrierIconUrl = tenantProvider.logo(carrier)
-
+        val logoUrl = getLogoUrl(tenant, paymentMethod)
         return if (tx.type == TransactionType.CASHIN.name)
             toRow(
-                carrierIconUrl?.let {
+                logoUrl?.let {
                     Icon(
-                        code = carrierIconUrl,
+                        code = logoUrl,
                         size = ICON_SIZE
                     )
                 },
@@ -114,9 +108,9 @@ abstract class AbstractTransactionStatusScreen(
                         radius = ICON_SIZE / 2
                     )
                 },
-                carrierIconUrl?.let {
+                logoUrl?.let {
                     Icon(
-                        code = carrierIconUrl,
+                        code = logoUrl,
                         size = ICON_SIZE
                     )
                 }

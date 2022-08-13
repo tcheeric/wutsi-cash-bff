@@ -3,7 +3,6 @@ package com.wutsi.application.cash.endpoint.cashout.screen
 import com.wutsi.application.cash.endpoint.AbstractQuery
 import com.wutsi.application.cash.endpoint.Page
 import com.wutsi.application.shared.Theme
-import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Column
@@ -27,7 +26,6 @@ import java.text.DecimalFormat
 @RestController
 @RequestMapping("/cashout")
 class CashoutScreen(
-    private val tenantProvider: TenantProvider,
     private val accountApi: WutsiAccountApi,
 ) : AbstractQuery() {
     @PostMapping
@@ -62,10 +60,9 @@ class CashoutScreen(
                                         hint = getText("page.cashout.payment-token.hint"),
                                         children = paymentMethods.map {
                                             DropdownMenuItem(
-                                                caption = formattedPhoneNumber(it.phone?.number, it.phone?.country)
-                                                    ?: it.maskedNumber,
+                                                caption = formattedAccountNumber(it) ?: it.maskedNumber,
                                                 value = it.token,
-                                                icon = getMobileCarrier(it, tenant)?.let { tenantProvider.logo(it) }
+                                                icon = getLogoUrl(tenant, it)
                                             )
                                         }
                                     )

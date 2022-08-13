@@ -3,7 +3,6 @@ package com.wutsi.application.cash.endpoint.send.screen
 import com.wutsi.application.cash.endpoint.AbstractQuery
 import com.wutsi.application.cash.endpoint.Page
 import com.wutsi.application.shared.Theme
-import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Column
@@ -23,9 +22,7 @@ import java.text.DecimalFormat
 
 @RestController
 @RequestMapping("/send")
-class SendScreen(
-    private val tenantProvider: TenantProvider,
-) : AbstractQuery() {
+class SendScreen : AbstractQuery() {
     @PostMapping
     fun index(@RequestParam(name = "recipient-id", required = false) recipientId: Long? = null): Widget {
         val tenant = tenantProvider.get()

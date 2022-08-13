@@ -1,7 +1,6 @@
 package com.wutsi.application.cash.endpoint.cashout.command
 
 import com.wutsi.application.cash.endpoint.AbstractCommand
-import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.platform.payment.core.Status
 import com.wutsi.platform.payment.dto.CreateCashoutRequest
@@ -14,9 +13,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/commands/cashout")
-class CashoutCommand(
-    private val tenantProvider: TenantProvider,
-) : AbstractCommand() {
+class CashoutCommand : AbstractCommand() {
     @PostMapping
     fun index(
         @RequestParam amount: Double,

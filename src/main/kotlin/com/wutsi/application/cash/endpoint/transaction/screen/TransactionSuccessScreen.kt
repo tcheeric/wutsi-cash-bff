@@ -2,7 +2,6 @@ package com.wutsi.application.cash.endpoint.transaction.screen
 
 import com.wutsi.application.cash.endpoint.Page
 import com.wutsi.application.shared.Theme
-import com.wutsi.application.shared.service.TenantProvider
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Screen
 import com.wutsi.flutter.sdui.Widget
@@ -16,8 +15,7 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/transaction/success")
 class TransactionSuccessScreen(
     accountApi: WutsiAccountApi,
-    tenantProvider: TenantProvider,
-) : AbstractTransactionStatusScreen(accountApi, tenantProvider) {
+) : AbstractTransactionStatusScreen(accountApi) {
     @PostMapping
     fun index(
         @RequestParam(name = "transaction-id") transactionId: String
@@ -34,7 +32,7 @@ class TransactionSuccessScreen(
                 children = listOf(
                     toSectionWidget(
                         padding = null,
-                        child = toSection1(tx, tenant)
+                        child = toSectionInfos(tx, tenant)
                     ),
                     toSectionWidget(
                         child = toTransactionStatusWidget(tx)
