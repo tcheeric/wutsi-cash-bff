@@ -42,30 +42,21 @@
           "children": []
         },
         {
-          "type": "Flexible",
+          "type": "Container",
           "attributes": {
-            "flex": 1,
-            "fit": "Tight"
+            "alignment": "TopCenter",
+            "padding": 20.0
           },
           "children": [
             {
-              "type": "Container",
+              "type": "Text",
               "attributes": {
-                "alignment": "TopCenter",
-                "padding": 20.0
+                "caption": "No transaction",
+                "bold": true,
+                "size": 16.0,
+                "alignment": "Center"
               },
-              "children": [
-                {
-                  "type": "Text",
-                  "attributes": {
-                    "caption": "No transaction",
-                    "bold": true,
-                    "size": 16.0,
-                    "alignment": "Center"
-                  },
-                  "children": []
-                }
-              ]
+              "children": []
             }
           ]
         }

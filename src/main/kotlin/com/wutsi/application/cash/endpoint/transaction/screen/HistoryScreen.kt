@@ -60,9 +60,7 @@ class HistoryScreen(
                     ),
                     Text(getText("page.history.title", arrayOf(limit))),
                     Divider(color = Theme.COLOR_DIVIDER),
-                    Flexible(
-                        child = transactionsWidget(limit, tenant)
-                    )
+                    transactionsWidget(limit, tenant)
                 ),
             ),
             bottomNavigationBar = bottomNavigationBar()

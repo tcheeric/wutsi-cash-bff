@@ -49,353 +49,344 @@
           },
           "children": [
             {
-              "type": "Flexible",
+              "type": "ListView",
               "attributes": {
-                "flex": 1,
-                "fit": "Tight"
+                "separator": true
               },
               "children": [
                 {
-                  "type": "ListView",
+                  "type": "ListItem",
                   "attributes": {
-                    "separator": true
-                  },
-                  "children": [
-                    {
-                      "type": "ListItem",
+                    "caption": "Add Cash",
+                    "subCaption": "+12379711111",
+                    "trailing": {
+                      "type": "Column",
                       "attributes": {
-                        "caption": "Add Cash",
-                        "subCaption": "+12379711111",
-                        "trailing": {
-                          "type": "Column",
+                        "mainAxisAlignment": "spaceAround",
+                        "crossAxisAlignment": "end"
+                      },
+                      "children": [
+                        {
+                          "type": "Text",
                           "attributes": {
-                            "mainAxisAlignment": "spaceAround",
-                            "crossAxisAlignment": "end"
+                            "caption": "10,000 XAF",
+                            "color": "#8B0000",
+                            "bold": true,
+                            "alignment": "Right"
                           },
-                          "children": [
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "10,000 XAF",
-                                "color": "#8B0000",
-                                "bold": true,
-                                "alignment": "Right"
-                              },
-                              "children": []
-                            },
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "01 Jan 2021",
-                                "size": 10.0,
-                                "alignment": "Right"
-                              },
-                              "children": []
-                            },
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "Failed",
-                                "color": "#8B0000",
-                                "bold": true,
-                                "size": 10.0
-                              },
-                              "children": []
-                            }
-                          ]
+                          "children": []
                         },
-                        "leading": {
-                          "type": "Image",
+                        {
+                          "type": "Text",
                           "attributes": {
-                            "url": "http://www.goole.com/images/mtn.png",
-                            "width": 48.0,
-                            "height": 48.0
+                            "caption": "01 Jan 2021",
+                            "size": 10.0,
+                            "alignment": "Right"
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "Failed",
+                            "color": "#8B0000",
+                            "bold": true,
+                            "size": 10.0
                           },
                           "children": []
                         }
-                      },
-                      "children": [],
-                      "action": {
-                        "type": "Route",
-                        "url": "http://localhost:0/transaction?id="
-                      }
+                      ]
                     },
-                    {
-                      "type": "ListItem",
+                    "leading": {
+                      "type": "Image",
                       "attributes": {
-                        "caption": "Add Cash",
-                        "subCaption": "+12379711111",
-                        "trailing": {
-                          "type": "Column",
-                          "attributes": {
-                            "mainAxisAlignment": "spaceAround",
-                            "crossAxisAlignment": "end"
-                          },
-                          "children": [
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "10,000 XAF",
-                                "bold": true,
-                                "alignment": "Right"
-                              },
-                              "children": []
-                            },
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "01 Jan 2021",
-                                "size": 10.0,
-                                "alignment": "Right"
-                              },
-                              "children": []
-                            }
-                          ]
-                        },
-                        "leading": {
-                          "type": "Image",
-                          "attributes": {
-                            "url": "http://www.goole.com/images/mtn.png",
-                            "width": 48.0,
-                            "height": 48.0
-                          },
-                          "children": []
-                        }
+                        "url": "http://www.goole.com/images/mtn.png",
+                        "width": 48.0,
+                        "height": 48.0
                       },
-                      "children": [],
-                      "action": {
-                        "type": "Route",
-                        "url": "http://localhost:0/transaction?id="
-                      }
-                    },
-                    {
-                      "type": "ListItem",
-                      "attributes": {
-                        "caption": "Transfer",
-                        "subCaption": "Name 100",
-                        "trailing": {
-                          "type": "Column",
-                          "attributes": {
-                            "mainAxisAlignment": "spaceAround",
-                            "crossAxisAlignment": "end"
-                          },
-                          "children": [
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "-10,000 XAF",
-                                "bold": true,
-                                "alignment": "Right"
-                              },
-                              "children": []
-                            },
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "01 Jan 2021",
-                                "size": 10.0,
-                                "alignment": "Right"
-                              },
-                              "children": []
-                            }
-                          ]
-                        },
-                        "leading": {
-                          "type": "CircleAvatar",
-                          "attributes": {
-                            "radius": 24.0
-                          },
-                          "children": [
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "N1",
-                                "bold": true,
-                                "size": 16.0
-                              },
-                              "children": []
-                            }
-                          ]
-                        }
-                      },
-                      "children": [],
-                      "action": {
-                        "type": "Route",
-                        "url": "http://localhost:0/transaction?id="
-                      }
-                    },
-                    {
-                      "type": "ListItem",
-                      "attributes": {
-                        "caption": "Transfer",
-                        "subCaption": "Name 101",
-                        "trailing": {
-                          "type": "Column",
-                          "attributes": {
-                            "mainAxisAlignment": "spaceAround",
-                            "crossAxisAlignment": "end"
-                          },
-                          "children": [
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "10,000 XAF",
-                                "color": "#856404",
-                                "bold": true,
-                                "alignment": "Right"
-                              },
-                              "children": []
-                            },
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "01 Jan 2021",
-                                "size": 10.0,
-                                "alignment": "Right"
-                              },
-                              "children": []
-                            },
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "Processing...",
-                                "color": "#856404",
-                                "bold": true,
-                                "size": 10.0
-                              },
-                              "children": []
-                            }
-                          ]
-                        },
-                        "leading": {
-                          "type": "CircleAvatar",
-                          "attributes": {
-                            "radius": 24.0
-                          },
-                          "children": [
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "N1",
-                                "bold": true,
-                                "size": 16.0
-                              },
-                              "children": []
-                            }
-                          ]
-                        }
-                      },
-                      "children": [],
-                      "action": {
-                        "type": "Route",
-                        "url": "http://localhost:0/transaction?id="
-                      }
-                    },
-                    {
-                      "type": "ListItem",
-                      "attributes": {
-                        "caption": "Transfer",
-                        "subCaption": "Name 101",
-                        "trailing": {
-                          "type": "Column",
-                          "attributes": {
-                            "mainAxisAlignment": "spaceAround",
-                            "crossAxisAlignment": "end"
-                          },
-                          "children": [
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "10,000 XAF",
-                                "bold": true,
-                                "alignment": "Right"
-                              },
-                              "children": []
-                            },
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "01 Jan 2021",
-                                "size": 10.0,
-                                "alignment": "Right"
-                              },
-                              "children": []
-                            }
-                          ]
-                        },
-                        "leading": {
-                          "type": "CircleAvatar",
-                          "attributes": {
-                            "radius": 24.0
-                          },
-                          "children": [
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "N1",
-                                "bold": true,
-                                "size": 16.0
-                              },
-                              "children": []
-                            }
-                          ]
-                        }
-                      },
-                      "children": [],
-                      "action": {
-                        "type": "Route",
-                        "url": "http://localhost:0/transaction?id="
-                      }
-                    },
-                    {
-                      "type": "ListItem",
-                      "attributes": {
-                        "caption": "Cash Out",
-                        "subCaption": "0022222",
-                        "trailing": {
-                          "type": "Column",
-                          "attributes": {
-                            "mainAxisAlignment": "spaceAround",
-                            "crossAxisAlignment": "end"
-                          },
-                          "children": [
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "-10,000 XAF",
-                                "bold": true,
-                                "alignment": "Right"
-                              },
-                              "children": []
-                            },
-                            {
-                              "type": "Text",
-                              "attributes": {
-                                "caption": "01 Jan 2021",
-                                "size": 10.0,
-                                "alignment": "Right"
-                              },
-                              "children": []
-                            }
-                          ]
-                        },
-                        "leading": {
-                          "type": "Image",
-                          "attributes": {
-                            "url": "",
-                            "width": 48.0,
-                            "height": 48.0
-                          },
-                          "children": []
-                        }
-                      },
-                      "children": [],
-                      "action": {
-                        "type": "Route",
-                        "url": "http://localhost:0/transaction?id="
-                      }
+                      "children": []
                     }
-                  ]
+                  },
+                  "children": [],
+                  "action": {
+                    "type": "Route",
+                    "url": "http://localhost:0/transaction?id="
+                  }
+                },
+                {
+                  "type": "ListItem",
+                  "attributes": {
+                    "caption": "Add Cash",
+                    "subCaption": "+12379711111",
+                    "trailing": {
+                      "type": "Column",
+                      "attributes": {
+                        "mainAxisAlignment": "spaceAround",
+                        "crossAxisAlignment": "end"
+                      },
+                      "children": [
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "10,000 XAF",
+                            "bold": true,
+                            "alignment": "Right"
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "01 Jan 2021",
+                            "size": 10.0,
+                            "alignment": "Right"
+                          },
+                          "children": []
+                        }
+                      ]
+                    },
+                    "leading": {
+                      "type": "Image",
+                      "attributes": {
+                        "url": "http://www.goole.com/images/mtn.png",
+                        "width": 48.0,
+                        "height": 48.0
+                      },
+                      "children": []
+                    }
+                  },
+                  "children": [],
+                  "action": {
+                    "type": "Route",
+                    "url": "http://localhost:0/transaction?id="
+                  }
+                },
+                {
+                  "type": "ListItem",
+                  "attributes": {
+                    "caption": "Transfer",
+                    "subCaption": "Name 100",
+                    "trailing": {
+                      "type": "Column",
+                      "attributes": {
+                        "mainAxisAlignment": "spaceAround",
+                        "crossAxisAlignment": "end"
+                      },
+                      "children": [
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "-10,000 XAF",
+                            "bold": true,
+                            "alignment": "Right"
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "01 Jan 2021",
+                            "size": 10.0,
+                            "alignment": "Right"
+                          },
+                          "children": []
+                        }
+                      ]
+                    },
+                    "leading": {
+                      "type": "CircleAvatar",
+                      "attributes": {
+                        "radius": 24.0
+                      },
+                      "children": [
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "N1",
+                            "bold": true,
+                            "size": 16.0
+                          },
+                          "children": []
+                        }
+                      ]
+                    }
+                  },
+                  "children": [],
+                  "action": {
+                    "type": "Route",
+                    "url": "http://localhost:0/transaction?id="
+                  }
+                },
+                {
+                  "type": "ListItem",
+                  "attributes": {
+                    "caption": "Transfer",
+                    "subCaption": "Name 101",
+                    "trailing": {
+                      "type": "Column",
+                      "attributes": {
+                        "mainAxisAlignment": "spaceAround",
+                        "crossAxisAlignment": "end"
+                      },
+                      "children": [
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "10,000 XAF",
+                            "color": "#856404",
+                            "bold": true,
+                            "alignment": "Right"
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "01 Jan 2021",
+                            "size": 10.0,
+                            "alignment": "Right"
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "Processing...",
+                            "color": "#856404",
+                            "bold": true,
+                            "size": 10.0
+                          },
+                          "children": []
+                        }
+                      ]
+                    },
+                    "leading": {
+                      "type": "CircleAvatar",
+                      "attributes": {
+                        "radius": 24.0
+                      },
+                      "children": [
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "N1",
+                            "bold": true,
+                            "size": 16.0
+                          },
+                          "children": []
+                        }
+                      ]
+                    }
+                  },
+                  "children": [],
+                  "action": {
+                    "type": "Route",
+                    "url": "http://localhost:0/transaction?id="
+                  }
+                },
+                {
+                  "type": "ListItem",
+                  "attributes": {
+                    "caption": "Transfer",
+                    "subCaption": "Name 101",
+                    "trailing": {
+                      "type": "Column",
+                      "attributes": {
+                        "mainAxisAlignment": "spaceAround",
+                        "crossAxisAlignment": "end"
+                      },
+                      "children": [
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "10,000 XAF",
+                            "bold": true,
+                            "alignment": "Right"
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "01 Jan 2021",
+                            "size": 10.0,
+                            "alignment": "Right"
+                          },
+                          "children": []
+                        }
+                      ]
+                    },
+                    "leading": {
+                      "type": "CircleAvatar",
+                      "attributes": {
+                        "radius": 24.0
+                      },
+                      "children": [
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "N1",
+                            "bold": true,
+                            "size": 16.0
+                          },
+                          "children": []
+                        }
+                      ]
+                    }
+                  },
+                  "children": [],
+                  "action": {
+                    "type": "Route",
+                    "url": "http://localhost:0/transaction?id="
+                  }
+                },
+                {
+                  "type": "ListItem",
+                  "attributes": {
+                    "caption": "Cash Out",
+                    "subCaption": "0022222",
+                    "trailing": {
+                      "type": "Column",
+                      "attributes": {
+                        "mainAxisAlignment": "spaceAround",
+                        "crossAxisAlignment": "end"
+                      },
+                      "children": [
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "-10,000 XAF",
+                            "bold": true,
+                            "alignment": "Right"
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "Text",
+                          "attributes": {
+                            "caption": "01 Jan 2021",
+                            "size": 10.0,
+                            "alignment": "Right"
+                          },
+                          "children": []
+                        }
+                      ]
+                    },
+                    "leading": {
+                      "type": "Image",
+                      "attributes": {
+                        "url": "",
+                        "width": 48.0,
+                        "height": 48.0
+                      },
+                      "children": []
+                    }
+                  },
+                  "children": [],
+                  "action": {
+                    "type": "Route",
+                    "url": "http://localhost:0/transaction?id="
+                  }
                 }
               ]
             }
