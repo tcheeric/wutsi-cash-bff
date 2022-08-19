@@ -41,7 +41,7 @@ class SendScreen : AbstractQuery() {
             ),
             child = Column(
                 mainAxisAlignment = MainAxisAlignment.center,
-                crossAxisAlignment = CrossAxisAlignment.start,
+                crossAxisAlignment = CrossAxisAlignment.center,
                 children = listOf(
                     Form(
                         children = listOf(

@@ -68,23 +68,29 @@ class CashoutScreen(
                                     }
                                 )
                             ),
-                            MoneyWithKeyboard(
-                                name = "amount",
-                                maxLength = 7,
-                                currency = tenant.currency,
-                                moneyColor = Theme.COLOR_PRIMARY,
-                                numberFormat = tenant.numberFormat,
-                                keyboardButtonSize = 65.0
-                            ),
-                            Container(
-                                padding = 10.0,
-                                child = Input(
-                                    name = "command",
-                                    type = Submit,
-                                    caption = getText("page.cashout.button.submit"),
-                                    action = Action(
-                                        type = Command,
-                                        url = urlBuilder.build("commands/cashout/amount")
+                            Column(
+                                mainAxisAlignment = MainAxisAlignment.center,
+                                crossAxisAlignment = CrossAxisAlignment.center,
+                                children = listOf(
+                                    MoneyWithKeyboard(
+                                        name = "amount",
+                                        maxLength = 7,
+                                        currency = tenant.currency,
+                                        moneyColor = Theme.COLOR_PRIMARY,
+                                        numberFormat = tenant.numberFormat,
+                                        keyboardButtonSize = 65.0
+                                    ),
+                                    Container(
+                                        padding = 10.0,
+                                        child = Input(
+                                            name = "command",
+                                            type = Submit,
+                                            caption = getText("page.cashout.button.submit"),
+                                            action = Action(
+                                                type = Command,
+                                                url = urlBuilder.build("commands/cashout/amount")
+                                            )
+                                        )
                                     )
                                 )
                             )
