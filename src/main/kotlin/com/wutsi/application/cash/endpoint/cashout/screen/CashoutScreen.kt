@@ -15,8 +15,9 @@ import com.wutsi.flutter.sdui.MoneyWithKeyboard
 import com.wutsi.flutter.sdui.Screen
 import com.wutsi.flutter.sdui.Widget
 import com.wutsi.flutter.sdui.enums.ActionType.Command
-import com.wutsi.flutter.sdui.enums.Alignment.Center
+import com.wutsi.flutter.sdui.enums.CrossAxisAlignment
 import com.wutsi.flutter.sdui.enums.InputType.Submit
+import com.wutsi.flutter.sdui.enums.MainAxisAlignment
 import com.wutsi.platform.account.WutsiAccountApi
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -45,46 +46,45 @@ class CashoutScreen(
                 foregroundColor = Theme.COLOR_BLACK,
                 title = getText("page.cashout.app-bar.title", arrayOf(balanceText))
             ),
-            child = Container(
-                alignment = Center,
-                child = Column(
-                    children = listOf(
-                        Form(
-                            children = listOf(
-                                Container(
-                                    padding = 10.0,
-                                    child = DropdownButton(
-                                        value = if (paymentMethods.size == 1) paymentMethods[0].token else null,
-                                        name = "paymentToken",
-                                        required = true,
-                                        hint = getText("page.cashout.payment-token.hint"),
-                                        children = paymentMethods.map {
-                                            DropdownMenuItem(
-                                                caption = formattedAccountNumber(it) ?: it.maskedNumber,
-                                                value = it.token,
-                                                icon = getLogoUrl(tenant, it)
-                                            )
-                                        }
-                                    )
-                                ),
-                                MoneyWithKeyboard(
-                                    name = "amount",
-                                    maxLength = 7,
-                                    currency = tenant.currency,
-                                    moneyColor = Theme.COLOR_PRIMARY,
-                                    numberFormat = tenant.numberFormat,
-                                    keyboardButtonSize = 65.0
-                                ),
-                                Container(
-                                    padding = 10.0,
-                                    child = Input(
-                                        name = "command",
-                                        type = Submit,
-                                        caption = getText("page.cashout.button.submit"),
-                                        action = Action(
-                                            type = Command,
-                                            url = urlBuilder.build("commands/cashout/amount")
+            child = Column(
+                mainAxisAlignment = MainAxisAlignment.center,
+                crossAxisAlignment = CrossAxisAlignment.start,
+                children = listOf(
+                    Form(
+                        children = listOf(
+                            Container(
+                                padding = 10.0,
+                                child = DropdownButton(
+                                    value = if (paymentMethods.size == 1) paymentMethods[0].token else null,
+                                    name = "paymentToken",
+                                    required = true,
+                                    hint = getText("page.cashout.payment-token.hint"),
+                                    children = paymentMethods.map {
+                                        DropdownMenuItem(
+                                            caption = formattedAccountNumber(it) ?: it.maskedNumber,
+                                            value = it.token,
+                                            icon = getLogoUrl(tenant, it)
                                         )
+                                    }
+                                )
+                            ),
+                            MoneyWithKeyboard(
+                                name = "amount",
+                                maxLength = 7,
+                                currency = tenant.currency,
+                                moneyColor = Theme.COLOR_PRIMARY,
+                                numberFormat = tenant.numberFormat,
+                                keyboardButtonSize = 65.0
+                            ),
+                            Container(
+                                padding = 10.0,
+                                child = Input(
+                                    name = "command",
+                                    type = Submit,
+                                    caption = getText("page.cashout.button.submit"),
+                                    action = Action(
+                                        type = Command,
+                                        url = urlBuilder.build("commands/cashout/amount")
                                     )
                                 )
                             )

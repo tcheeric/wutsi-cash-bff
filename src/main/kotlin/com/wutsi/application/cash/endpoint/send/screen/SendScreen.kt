@@ -13,7 +13,9 @@ import com.wutsi.flutter.sdui.MoneyWithKeyboard
 import com.wutsi.flutter.sdui.Screen
 import com.wutsi.flutter.sdui.Widget
 import com.wutsi.flutter.sdui.enums.ActionType.Command
+import com.wutsi.flutter.sdui.enums.CrossAxisAlignment
 import com.wutsi.flutter.sdui.enums.InputType.Submit
+import com.wutsi.flutter.sdui.enums.MainAxisAlignment
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
@@ -38,6 +40,8 @@ class SendScreen : AbstractQuery() {
                 title = getText("page.send.app-bar.title", arrayOf(balanceText)),
             ),
             child = Column(
+                mainAxisAlignment = MainAxisAlignment.center,
+                crossAxisAlignment = CrossAxisAlignment.start,
                 children = listOf(
                     Form(
                         children = listOf(

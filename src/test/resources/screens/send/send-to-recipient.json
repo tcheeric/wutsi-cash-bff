@@ -8,7 +8,10 @@
   "children": [
     {
       "type": "Column",
-      "attributes": {},
+      "attributes": {
+        "mainAxisAlignment": "center",
+        "crossAxisAlignment": "start"
+      },
       "children": [
         {
           "type": "Form",

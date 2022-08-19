@@ -6,100 +6,95 @@
   },
   "children": [
     {
-      "type": "Container",
+      "type": "Column",
       "attributes": {
-        "alignment": "Center"
+        "mainAxisAlignment": "center",
+        "crossAxisAlignment": "start"
       },
       "children": [
         {
-          "type": "Column",
+          "type": "Form",
           "attributes": {},
           "children": [
             {
-              "type": "Form",
-              "attributes": {},
+              "type": "Container",
+              "attributes": {
+                "padding": 10.0
+              },
               "children": [
                 {
-                  "type": "Container",
+                  "type": "DropdownButton",
                   "attributes": {
-                    "padding": 10.0
+                    "name": "paymentToken",
+                    "hint": "Choose an Account",
+                    "required": true
                   },
                   "children": [
                     {
-                      "type": "DropdownButton",
+                      "type": "DropdownMenuItem",
                       "attributes": {
-                        "name": "paymentToken",
-                        "hint": "Choose an Account",
-                        "required": true
+                        "caption": "xxxx9999",
+                        "icon": "http://www.goole.com/images/mtn.png",
+                        "enabled": true,
+                        "value": "xxxxxx"
                       },
-                      "children": [
-                        {
-                          "type": "DropdownMenuItem",
-                          "attributes": {
-                            "caption": "xxxx9999",
-                            "icon": "http://www.goole.com/images/mtn.png",
-                            "enabled": true,
-                            "value": "xxxxxx"
-                          },
-                          "children": []
-                        },
-                        {
-                          "type": "DropdownMenuItem",
-                          "attributes": {
-                            "caption": "xxxx1111",
-                            "icon": "http://www.goole.com/images/orange.png",
-                            "enabled": true,
-                            "value": "yyyyy"
-                          },
-                          "children": []
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "Container",
-                  "attributes": {},
-                  "children": [
+                      "children": []
+                    },
                     {
-                      "type": "MoneyWithKeyboard",
+                      "type": "DropdownMenuItem",
                       "attributes": {
-                        "name": "amount",
-                        "moneyColor": "#1D7EDF",
-                        "maxLength": 7,
-                        "currency": "CFA",
-                        "keyboardButtonSize": 65.0,
-                        "numberFormat": "#,###,##0"
+                        "caption": "xxxx1111",
+                        "icon": "http://www.goole.com/images/orange.png",
+                        "enabled": true,
+                        "value": "yyyyy"
                       },
                       "children": []
                     }
                   ]
-                },
+                }
+              ]
+            },
+            {
+              "type": "Container",
+              "attributes": {},
+              "children": [
                 {
-                  "type": "Container",
+                  "type": "MoneyWithKeyboard",
                   "attributes": {
-                    "padding": 10.0
+                    "name": "amount",
+                    "moneyColor": "#1D7EDF",
+                    "maxLength": 7,
+                    "currency": "CFA",
+                    "keyboardButtonSize": 65.0,
+                    "numberFormat": "#,###,##0"
                   },
-                  "children": [
-                    {
-                      "type": "Input",
-                      "attributes": {
-                        "name": "command",
-                        "hideText": false,
-                        "required": false,
-                        "caption": "Add Cash",
-                        "enabled": true,
-                        "readOnly": false,
-                        "type": "Submit",
-                        "minLength": 0
-                      },
-                      "children": [],
-                      "action": {
-                        "type": "Command",
-                        "url": "http://localhost:0/commands/cashin/amount"
-                      }
-                    }
-                  ]
+                  "children": []
+                }
+              ]
+            },
+            {
+              "type": "Container",
+              "attributes": {
+                "padding": 10.0
+              },
+              "children": [
+                {
+                  "type": "Input",
+                  "attributes": {
+                    "name": "command",
+                    "hideText": false,
+                    "required": false,
+                    "caption": "Add Cash",
+                    "enabled": true,
+                    "readOnly": false,
+                    "type": "Submit",
+                    "minLength": 0
+                  },
+                  "children": [],
+                  "action": {
+                    "type": "Command",
+                    "url": "http://localhost:0/commands/cashin/amount"
+                  }
                 }
               ]
             }
