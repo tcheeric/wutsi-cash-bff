@@ -304,7 +304,7 @@ class TransactionScreen(
         Row(
             children = listOf(
                 Flexible(
-                    flex = 1,
+                    flex = 2,
                     child = Container(
                         padding = 10.0,
                         child = Text(
