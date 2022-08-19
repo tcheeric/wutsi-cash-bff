@@ -47,7 +47,7 @@ class CashoutScreen(
                 title = getText("page.cashout.app-bar.title", arrayOf(balanceText))
             ),
             child = Column(
-                mainAxisAlignment = MainAxisAlignment.center,
+                mainAxisAlignment = MainAxisAlignment.start,
                 crossAxisAlignment = CrossAxisAlignment.start,
                 children = listOf(
                     Form(

@@ -8,7 +8,7 @@
     {
       "type": "Column",
       "attributes": {
-        "mainAxisAlignment": "center",
+        "mainAxisAlignment": "start",
         "crossAxisAlignment": "start"
       },
       "children": [

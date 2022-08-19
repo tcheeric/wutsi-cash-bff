@@ -47,7 +47,7 @@ class CashinScreen(
                 title = getText("page.cashin.app-bar.title", arrayOf(balanceText))
             ),
             child = Column(
-                mainAxisAlignment = MainAxisAlignment.center,
+                mainAxisAlignment = MainAxisAlignment.start,
                 crossAxisAlignment = CrossAxisAlignment.start,
                 children = listOf(
                     Form(
