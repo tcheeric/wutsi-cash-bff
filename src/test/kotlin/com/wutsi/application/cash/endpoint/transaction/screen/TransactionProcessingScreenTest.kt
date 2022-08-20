@@ -34,7 +34,7 @@ internal class TransactionProcessingScreenTest : AbstractEndpointTest() {
         PaymentMethodSummary(
             token = paymentToken,
             provider = PaymentMethodProvider.ORANGE.name,
-            type = PaymentMethodType.MOBILE.name,
+            type = PaymentMethodType.MOBILE.name
         )
     )
 

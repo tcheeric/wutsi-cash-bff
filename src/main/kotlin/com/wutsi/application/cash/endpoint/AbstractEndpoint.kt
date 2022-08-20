@@ -27,6 +27,8 @@ import com.wutsi.platform.account.dto.PaymentMethod
 import com.wutsi.platform.account.dto.PaymentMethodSummary
 import com.wutsi.platform.core.error.ErrorResponse
 import com.wutsi.platform.core.logging.KVLogger
+import com.wutsi.platform.payment.Capability
+import com.wutsi.platform.payment.PaymentMethodProvider
 import com.wutsi.platform.payment.PaymentMethodType
 import com.wutsi.platform.payment.WutsiPaymentApi
 import com.wutsi.platform.payment.core.ErrorCode
@@ -272,7 +274,7 @@ abstract class AbstractEndpoint {
         borderColor = Theme.COLOR_GRAY_LIGHT,
         background = background,
         width = Double.MAX_VALUE,
-        child = child,
+        child = child
     )
 
     protected fun toFeeDetailsWidget(fees: TransactionFee, fmt: DecimalFormat, prefix: String): WidgetAware =
@@ -283,7 +285,7 @@ abstract class AbstractEndpoint {
                     child = Text(
                         caption = getText(
                             "$prefix.transaction-fees",
-                            arrayOf(fmt.format(fees.fees)),
+                            arrayOf(fmt.format(fees.fees))
                         ),
                         bold = true
                     )
@@ -301,4 +303,9 @@ abstract class AbstractEndpoint {
                 )
             )
         )
+
+    protected fun support(paymentMethod: PaymentMethodSummary, capability: Capability): Boolean {
+        val paymentMethodProvider = PaymentMethodProvider.valueOf(paymentMethod.provider.uppercase())
+        return paymentMethodProvider.capabilities.contains(capability)
+    }
 }

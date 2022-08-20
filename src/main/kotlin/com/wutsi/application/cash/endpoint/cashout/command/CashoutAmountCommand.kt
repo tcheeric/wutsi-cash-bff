@@ -19,10 +19,13 @@ import javax.validation.Valid
 @RestController
 @RequestMapping("/commands/cashout/amount")
 class CashoutAmountCommand(
-    private val idempotencyKeyGenerator: IdempotencyKeyGenerator,
+    private val idempotencyKeyGenerator: IdempotencyKeyGenerator
 ) : AbstractCommand() {
     @PostMapping
-    fun index(@RequestBody @Valid request: CashoutRequest): Action {
+    fun index(
+        @RequestBody @Valid
+        request: CashoutRequest
+    ): Action {
         logger.add("amount", request.amount)
         logger.add("payment_token", request.paymentToken)
 
@@ -59,7 +62,7 @@ class CashoutAmountCommand(
                 prompt = Dialog(
                     type = DialogType.Error,
                     message = getText("prompt.error.transaction-failed.NOT_ENOUGH_FUNDS"),
-                    title = getText("prompt.error.title"),
+                    title = getText("prompt.error.title")
                 ).toWidget()
             )
         return null

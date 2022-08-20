@@ -117,10 +117,10 @@ class TransactionScreen(
                                                     Text(
                                                         caption = getTransactionErrorMessage(tx.errorCode),
                                                         size = Theme.TEXT_SIZE_SMALL,
-                                                        maxLines = 5,
+                                                        maxLines = 5
                                                     )
                                                 ),
-                                                Divider(color = Theme.COLOR_DIVIDER),
+                                                Divider(color = Theme.COLOR_DIVIDER)
                                             )
                                         )
                                     else
@@ -145,7 +145,7 @@ class TransactionScreen(
                                             )
                                         )
                                     else
-                                        null,
+                                        null
                                 )
                             )
                         ),
@@ -173,11 +173,11 @@ class TransactionScreen(
                                 )
                             )
                         )
-                    ),
+                    )
                 )
             ),
             bottomNavigationBar = bottomNavigationBar(),
-            backgroundColor = Theme.COLOR_GRAY_LIGHT,
+            backgroundColor = Theme.COLOR_GRAY_LIGHT
         ).toWidget()
     }
 
@@ -283,7 +283,7 @@ class TransactionScreen(
             action = Action(
                 type = ActionType.Route,
                 url = urlBuilder.build(shellUrl, "profile?id=${account.id}")
-            ),
+            )
         )
 
     private fun toRowWidget(key: String, value: String?, color: String? = null, bold: Boolean? = null): WidgetAware =
@@ -297,7 +297,7 @@ class TransactionScreen(
                     color = color,
                     bold = bold
                 )
-            ),
+            )
         )
 
     private fun toRowWidget(key: String, value: WidgetAware): WidgetAware =
@@ -310,13 +310,13 @@ class TransactionScreen(
                         child = Text(
                             getText(key),
                             bold = true,
-                            alignment = TextAlignment.Right,
+                            alignment = TextAlignment.Right
                         )
-                    ),
+                    )
                 ),
                 Flexible(
                     flex = 3,
-                    child = value,
+                    child = value
                 )
             )
         )
@@ -329,7 +329,7 @@ class TransactionScreen(
     private fun findAccounts(tx: Transaction): Map<Long, AccountSummary> =
         accountApi.searchAccount(
             SearchAccountRequest(
-                ids = listOf(tx.accountId, tx.recipientId).filterNotNull(),
+                ids = listOf(tx.accountId, tx.recipientId).filterNotNull()
             )
         ).accounts.map { it.id to it }.toMap()
 }

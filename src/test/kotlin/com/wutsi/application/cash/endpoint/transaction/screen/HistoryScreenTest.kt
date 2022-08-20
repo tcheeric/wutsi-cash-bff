@@ -54,7 +54,7 @@ internal class HistoryScreenTest : AbstractEndpointTest() {
                 type = PaymentMethodType.BANK,
                 provider = PaymentMethodProvider.WAF
             ),
-            createPaymentMethodSummary("C", "33333"),
+            createPaymentMethodSummary("C", "33333")
         )
         doReturn(ListPaymentMethodResponse(paymentMethods)).whenever(accountApi).listPaymentMethods(any())
 

@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/history")
 class HistoryScreen(
-    private val accountApi: WutsiAccountApi,
+    private val accountApi: WutsiAccountApi
 ) : AbstractQuery() {
     @PostMapping
     fun index(): Widget {
@@ -61,7 +61,7 @@ class HistoryScreen(
                     Text(getText("page.history.title", arrayOf(limit))),
                     Divider(color = Theme.COLOR_DIVIDER),
                     transactionsWidget(limit, tenant)
-                ),
+                )
             ),
             bottomNavigationBar = bottomNavigationBar()
         ).toWidget()
@@ -98,7 +98,7 @@ class HistoryScreen(
                             accounts = accounts,
                             paymentMethod = it.paymentMethodToken?.let { paymentMethods[it] },
                             tenant = tenant,
-                            tenantProvider = tenantProvider,
+                            tenantProvider = tenantProvider
                         )
                     )
                 }

@@ -45,7 +45,7 @@ import java.text.DecimalFormat
 @RequestMapping("/send/recipient")
 class SendRecipientScreen(
     private val contactApi: WutsiContactApi,
-    private val accountApi: WutsiAccountApi,
+    private val accountApi: WutsiAccountApi
 ) : AbstractQuery() {
     @PostMapping
     fun index(@RequestParam amount: Double): Widget {
@@ -54,7 +54,7 @@ class SendRecipientScreen(
         val contacts = contactApi.searchContact(
             SearchContactRequest(
                 limit = 100,
-                offset = 0,
+                offset = 0
             )
         ).contacts
 
@@ -132,7 +132,7 @@ class SendRecipientScreen(
                                     "page.send-recipient.phone.sub-title"
                                 ),
                                 alignment = TextAlignment.Center,
-                                color = Theme.COLOR_BLACK,
+                                color = Theme.COLOR_BLACK
                             )
                         ),
                         Container(
@@ -142,7 +142,7 @@ class SendRecipientScreen(
                                 type = Phone,
                                 required = true,
                                 countries = tenant.countries
-                            ),
+                            )
                         ),
                         Container(
                             padding = 10.0,
@@ -188,7 +188,7 @@ class SendRecipientScreen(
                             alignment = TextAlignment.Left,
                             size = Theme.TEXT_SIZE_LARGE,
                             color = Theme.COLOR_PRIMARY,
-                            bold = true,
+                            bold = true
                         )
                     ),
                     Container(
@@ -199,17 +199,17 @@ class SendRecipientScreen(
                                 "page.send-recipient.contact.sub-title"
                             ),
                             alignment = TextAlignment.Left,
-                            color = Theme.COLOR_BLACK,
+                            color = Theme.COLOR_BLACK
                         )
                     ),
                     Divider(color = Theme.COLOR_DIVIDER),
                     Flexible(
                         child = ListView(
                             children = accounts.map { toListItem(it, amount, tenant) },
-                            separator = true,
+                            separator = true
                         )
                     )
-                ),
+                )
             )
         )
     }

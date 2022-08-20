@@ -20,7 +20,8 @@ class SendAmountCommand : AbstractCommand() {
     @PostMapping
     fun index(
         @RequestParam(name = "recipient-id", required = false) recipientId: Long? = null,
-        @RequestBody @Valid request: SendAmountRequest
+        @RequestBody @Valid
+        request: SendAmountRequest
     ): Action {
         logger.add("amount", request.amount)
 
@@ -43,7 +44,7 @@ class SendAmountCommand : AbstractCommand() {
     private fun validate(request: SendAmountRequest): Action? {
         if (request.amount == 0.0)
             return showError(
-                message = getText("prompt.error.amount-required"),
+                message = getText("prompt.error.amount-required")
             )
 
         val balance = getBalance()
@@ -53,7 +54,7 @@ class SendAmountCommand : AbstractCommand() {
                 prompt = Dialog(
                     type = DialogType.Error,
                     message = getText("prompt.error.transaction-failed.NOT_ENOUGH_FUNDS"),
-                    title = getText("prompt.error.title"),
+                    title = getText("prompt.error.title")
                 ).toWidget()
             )
 

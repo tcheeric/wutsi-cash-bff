@@ -34,7 +34,7 @@ import java.text.DecimalFormat
 @RestController
 @RequestMapping("/send/pending")
 class SendPendingScreen(
-    private val accountApi: WutsiAccountApi,
+    private val accountApi: WutsiAccountApi
 ) : AbstractQuery() {
     @PostMapping
     fun index(
@@ -59,11 +59,11 @@ class SendPendingScreen(
                             url = "route:/~"
                         )
                     )
-                ),
+                )
             ),
             child = Column(
                 children = pending(tx, recipient, tenant)
-            ),
+            )
         ).toWidget()
     }
 
@@ -73,13 +73,13 @@ class SendPendingScreen(
             ProfileCard(
                 model = sharedUIMapper.toAccountModel(recipient),
                 showPhoneNumber = false,
-                showWebsite = false,
+                showWebsite = false
             ),
             Divider(color = Theme.COLOR_DIVIDER),
             MoneyText(
                 value = tx.net,
                 numberFormat = tenant.numberFormat,
-                currency = tenant.currencySymbol,
+                currency = tenant.currencySymbol
             ),
             Container(
                 alignment = Alignment.Center,
@@ -97,7 +97,7 @@ class SendPendingScreen(
             Text(
                 caption = getText("page.send-pending.message"),
                 alignment = TextAlignment.Center,
-                size = Theme.TEXT_SIZE_LARGE,
+                size = Theme.TEXT_SIZE_LARGE
             ),
             Container(
                 padding = 10.0,

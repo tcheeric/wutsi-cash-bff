@@ -17,17 +17,20 @@ import com.wutsi.platform.core.test.TestTokenProvider
 import com.wutsi.platform.core.tracing.TracingContext
 import com.wutsi.platform.core.tracing.spring.SpringTracingRequestInterceptor
 import com.wutsi.platform.core.util.URN
+import com.wutsi.platform.payment.PaymentMethodProvider
 import com.wutsi.platform.payment.WutsiPaymentApi
 import com.wutsi.platform.payment.core.ErrorCode
 import com.wutsi.platform.payment.dto.Balance
 import com.wutsi.platform.payment.dto.GetBalanceResponse
 import com.wutsi.platform.tenant.WutsiTenantApi
+import com.wutsi.platform.tenant.dto.FinancialInstitution
 import com.wutsi.platform.tenant.dto.GetTenantResponse
 import com.wutsi.platform.tenant.dto.Limits
 import com.wutsi.platform.tenant.dto.Logo
 import com.wutsi.platform.tenant.dto.MobileCarrier
 import com.wutsi.platform.tenant.dto.PhonePrefix
 import com.wutsi.platform.tenant.dto.Tenant
+import com.wutsi.platform.tenant.entity.FinancialInstitutionType
 import feign.FeignException
 import feign.Request
 import feign.RequestTemplate
@@ -103,7 +106,7 @@ abstract class AbstractEndpointTest {
                         PhonePrefix(
                             country = "CM",
                             prefixes = listOf("+23795")
-                        ),
+                        )
                     ),
                     logos = listOf(
                         Logo(type = "PICTORIAL", url = "http://www.goole.com/images/mtn.png")
@@ -117,7 +120,7 @@ abstract class AbstractEndpointTest {
                         PhonePrefix(
                             country = "CM",
                             prefixes = listOf("+23722")
-                        ),
+                        )
                     ),
                     logos = listOf(
                         Logo(type = "PICTORIAL", url = "http://www.goole.com/images/orange.png")
@@ -127,6 +130,26 @@ abstract class AbstractEndpointTest {
             limits = Limits(
                 minCashin = 5000.0,
                 minCashout = 5000.0
+            ),
+            financialInstitutions = listOf(
+                FinancialInstitution(
+                    code = PaymentMethodProvider.WAF.name,
+                    name = "Woman Access Finance",
+                    type = FinancialInstitutionType.MICRO_FINANCE.name,
+                    countries = listOf("CM"),
+                    logos = listOf(
+                        Logo(type = "PICTORIAL", url = "https://www.goole.com/images/waf.png")
+                    )
+                ),
+                FinancialInstitution(
+                    code = PaymentMethodProvider.UBA.name,
+                    name = "UNION BANK AFRICAN",
+                    type = FinancialInstitutionType.RETAIL.name,
+                    countries = listOf("CM"),
+                    logos = listOf(
+                        Logo(type = "PICTORIAL", url = "https://www.goole.com/images/uba.png")
+                    )
+                )
             )
         )
         doReturn(GetTenantResponse(tenant)).whenever(tenantApi).getTenant(any())

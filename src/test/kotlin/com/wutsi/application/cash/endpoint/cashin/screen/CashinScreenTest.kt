@@ -42,6 +42,18 @@ internal class CashinScreenTest : AbstractEndpointTest() {
                     provider = PaymentMethodProvider.ORANGE.name,
                     type = PaymentMethodType.MOBILE.name,
                     maskedNumber = "xxxx1111"
+                ),
+                PaymentMethodSummary(
+                    token = "zzzz",
+                    provider = PaymentMethodProvider.WAF.name,
+                    type = PaymentMethodType.BANK.name,
+                    maskedNumber = "xxxx2222"
+                ),
+                PaymentMethodSummary(
+                    token = "aaaaa",
+                    provider = PaymentMethodProvider.UBA.name,
+                    type = PaymentMethodType.BANK.name,
+                    maskedNumber = "aaaaa2222"
                 )
             )
         )

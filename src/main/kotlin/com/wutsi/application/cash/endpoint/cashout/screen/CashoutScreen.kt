@@ -19,6 +19,7 @@ import com.wutsi.flutter.sdui.enums.CrossAxisAlignment
 import com.wutsi.flutter.sdui.enums.InputType.Submit
 import com.wutsi.flutter.sdui.enums.MainAxisAlignment
 import com.wutsi.platform.account.WutsiAccountApi
+import com.wutsi.platform.payment.Capability
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -27,14 +28,14 @@ import java.text.DecimalFormat
 @RestController
 @RequestMapping("/cashout")
 class CashoutScreen(
-    private val accountApi: WutsiAccountApi,
+    private val accountApi: WutsiAccountApi
 ) : AbstractQuery() {
     @PostMapping
     fun index(): Widget {
         val tenant = tenantProvider.get()
         val paymentMethods = accountApi.listPaymentMethods(
             securityContext.currentAccountId()
-        ).paymentMethods
+        ).paymentMethods.filter { support(it, Capability.TRANSFER) }
         val balance = getBalance(tenant)
         val balanceText = DecimalFormat(tenant.monetaryFormat).format(balance.value)
 
@@ -97,7 +98,7 @@ class CashoutScreen(
                         )
                     )
                 )
-            ),
+            )
         ).toWidget()
     }
 }

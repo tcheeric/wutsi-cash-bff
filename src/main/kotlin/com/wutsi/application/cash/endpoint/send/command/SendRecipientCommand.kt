@@ -15,12 +15,13 @@ import javax.validation.Valid
 @RestController
 @RequestMapping("/commands/send/recipient")
 class SendRecipientCommand(
-    private val accountApi: WutsiAccountApi,
+    private val accountApi: WutsiAccountApi
 ) : AbstractCommand() {
     @PostMapping
     fun index(
         @RequestParam amount: Double,
-        @RequestBody @Valid request: SendRecipientRequest
+        @RequestBody @Valid
+        request: SendRecipientRequest
     ): Action {
         logger.add("phone_number", request.phoneNumber)
 

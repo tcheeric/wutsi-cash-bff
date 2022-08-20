@@ -20,7 +20,7 @@ import com.wutsi.platform.payment.entity.TransactionType
 import com.wutsi.platform.tenant.dto.Tenant
 
 abstract class AbstractTransactionStatusScreen(
-    protected val accountApi: WutsiAccountApi,
+    protected val accountApi: WutsiAccountApi
 ) : AbstractQuery() {
     companion object {
         const val ICON_SIZE = 48.0
@@ -73,7 +73,7 @@ abstract class AbstractTransactionStatusScreen(
                     model = sharedUIMapper.toAccountModel(it),
                     radius = ICON_SIZE / 2
                 )
-            },
+            }
         )
     }
 
@@ -98,7 +98,7 @@ abstract class AbstractTransactionStatusScreen(
                         model = sharedUIMapper.toAccountModel(it),
                         radius = ICON_SIZE / 2
                     )
-                },
+                }
             )
         else
             toRow(
@@ -134,7 +134,7 @@ abstract class AbstractTransactionStatusScreen(
                     padding = 5.0,
                     child = it
                 )
-            },
+            }
         )
     )
 }

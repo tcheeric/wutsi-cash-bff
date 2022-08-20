@@ -35,13 +35,13 @@ import java.text.DecimalFormat
 class CashinConfirmScreen(
     private val accountApi: WutsiAccountApi,
 
-    @Value("\${wutsi.application.login-url}") private val loginUrl: String,
+    @Value("\${wutsi.application.login-url}") private val loginUrl: String
 ) : AbstractQuery() {
     @PostMapping
     fun index(
         @RequestParam amount: Double,
         @RequestParam("payment-token") paymentToken: String,
-        @RequestParam("idempotency-key") idempotencyKey: String,
+        @RequestParam("idempotency-key") idempotencyKey: String
     ): Widget {
         val accountId = securityContext.currentAccountId()
         val tenant = tenantProvider.get()
@@ -87,11 +87,11 @@ class CashinConfirmScreen(
                                                 caption = paymentMethod.number ?: paymentMethod.maskedNumber,
                                                 size = Theme.TEXT_SIZE_LARGE
                                             )
-                                        ),
+                                        )
                                     ),
-                                    Divider(color = Theme.COLOR_DIVIDER),
+                                    Divider(color = Theme.COLOR_DIVIDER)
                                 )
-                            ),
+                            )
                         ),
                         Container(
                             padding = 10.0,
@@ -100,7 +100,7 @@ class CashinConfirmScreen(
                                 currency = tenant.currency,
                                 numberFormat = tenant.numberFormat,
                                 color = Theme.COLOR_PRIMARY
-                            ),
+                            )
                         ),
                         toFeeDetailsWidget(fees, fmt, Page.CASHIN_CONFIRM),
                         Container(padding = 20.0),
@@ -121,7 +121,7 @@ class CashinConfirmScreen(
                         )
                     )
                 )
-            ),
+            )
         ).toWidget()
     }
 

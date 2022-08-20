@@ -44,7 +44,7 @@ internal class TransactionScreenTest : AbstractEndpointTest() {
         val paymentMethods = listOf(
             createPaymentMethodSummary("A", "11111"),
             createPaymentMethodSummary("B", "22222"),
-            createPaymentMethodSummary("C", "33333"),
+            createPaymentMethodSummary("C", "33333")
         )
         doReturn(ListPaymentMethodResponse(paymentMethods)).whenever(accountApi).listPaymentMethods(any())
 
@@ -129,7 +129,7 @@ internal class TransactionScreenTest : AbstractEndpointTest() {
         status: Status = Status.SUCCESSFUL,
         type: TransactionType = TransactionType.TRANSFER,
         orderId: String? = null,
-        errorCode: String? = null,
+        errorCode: String? = null
     ) =
         Transaction(
             id = "13230923092aef",

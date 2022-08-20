@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/transaction/processing")
 class TransactionProcessingScreen(
-    accountApi: WutsiAccountApi,
+    accountApi: WutsiAccountApi
 ) : AbstractTransactionStatusScreen(accountApi) {
     @PostMapping
     fun index(
-        @RequestParam(name = "transaction-id") transactionId: String,
+        @RequestParam(name = "transaction-id") transactionId: String
     ): Widget {
         val tx = paymentApi.getTransaction(transactionId).transaction
         val tenant = tenantProvider.get()
@@ -53,9 +53,9 @@ class TransactionProcessingScreen(
                                 )
                             )
                         )
-                    ),
-                ),
-            ),
+                    )
+                )
+            )
         ).toWidget()
     }
 }

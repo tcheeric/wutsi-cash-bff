@@ -19,6 +19,7 @@ import com.wutsi.flutter.sdui.enums.CrossAxisAlignment
 import com.wutsi.flutter.sdui.enums.InputType.Submit
 import com.wutsi.flutter.sdui.enums.MainAxisAlignment
 import com.wutsi.platform.account.WutsiAccountApi
+import com.wutsi.platform.payment.Capability
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -27,7 +28,7 @@ import java.text.DecimalFormat
 @RestController
 @RequestMapping("/cashin")
 class CashinScreen(
-    private val accountApi: WutsiAccountApi,
+    private val accountApi: WutsiAccountApi
 ) : AbstractQuery() {
     @PostMapping
     fun index(): Widget {
@@ -36,7 +37,7 @@ class CashinScreen(
         val balanceText = DecimalFormat(tenant.monetaryFormat).format(balance.value)
         val paymentMethods = accountApi.listPaymentMethods(
             securityContext.currentAccountId()
-        ).paymentMethods
+        ).paymentMethods.filter { support(it, Capability.PAYMENT) }
 
         return Screen(
             id = Page.CASHIN,
@@ -80,7 +81,7 @@ class CashinScreen(
                                             moneyColor = Theme.COLOR_PRIMARY,
                                             numberFormat = tenant.numberFormat,
                                             keyboardButtonSize = 65.0
-                                        ),
+                                        )
                                     ),
                                     Container(
                                         padding = 10.0,
@@ -98,8 +99,8 @@ class CashinScreen(
                             )
                         )
                     )
-                ),
-            ),
+                )
+            )
         ).toWidget()
     }
 }

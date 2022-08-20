@@ -31,7 +31,7 @@ import java.text.DecimalFormat
 @RestController
 @RequestMapping("/send/approval")
 class SendApprovalScreen(
-    private val accountApi: WutsiAccountApi,
+    private val accountApi: WutsiAccountApi
 ) : AbstractQuery() {
     @PostMapping
     fun index(
@@ -54,7 +54,7 @@ class SendApprovalScreen(
                         action = gotoHome()
                     )
                 ),
-                title = getText("page.send-approval.app-bar.title"),
+                title = getText("page.send-approval.app-bar.title")
             ),
             child = Column(
                 children = listOf(
@@ -63,7 +63,7 @@ class SendApprovalScreen(
                         alignment = Alignment.Center,
                         child = Text(
                             caption = getText("page.send-approval.message"),
-                            size = Theme.TEXT_SIZE_LARGE,
+                            size = Theme.TEXT_SIZE_LARGE
                         )
                     ),
                     MoneyText(
@@ -86,7 +86,7 @@ class SendApprovalScreen(
                         alignment = Alignment.Center,
                         child = Text(
                             caption = getText("page.send-approval.from"),
-                            size = Theme.TEXT_SIZE_LARGE,
+                            size = Theme.TEXT_SIZE_LARGE
                         )
                     ),
                     ProfileCard(
@@ -120,9 +120,9 @@ class SendApprovalScreen(
                                 )
                             )
                         )
-                    ),
+                    )
                 )
-            ),
+            )
         ).toWidget()
     }
 }

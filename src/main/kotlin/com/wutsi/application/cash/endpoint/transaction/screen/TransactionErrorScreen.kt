@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/transaction/error")
 class TransactionErrorScreen(
-    accountApi: WutsiAccountApi,
+    accountApi: WutsiAccountApi
 ) : AbstractTransactionStatusScreen(accountApi) {
     @PostMapping
     fun index(
@@ -24,7 +24,7 @@ class TransactionErrorScreen(
         @RequestParam amount: Double,
         @RequestParam type: TransactionType,
         @RequestParam(name = "recipient-id", required = false) recipientId: Long? = null,
-        @RequestParam(name = "payment-token", required = false) paymentToken: String? = null,
+        @RequestParam(name = "payment-token", required = false) paymentToken: String? = null
     ): Widget {
         val tenant = tenantProvider.get()
         val tx = Transaction(
@@ -49,9 +49,9 @@ class TransactionErrorScreen(
                     ),
                     toSectionWidget(
                         child = toTransactionStatusWidget(tx, error)
-                    ),
-                ),
-            ),
+                    )
+                )
+            )
         ).toWidget()
     }
 }

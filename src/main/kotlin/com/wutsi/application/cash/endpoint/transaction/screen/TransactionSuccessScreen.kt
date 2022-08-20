@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/transaction/success")
 class TransactionSuccessScreen(
-    accountApi: WutsiAccountApi,
+    accountApi: WutsiAccountApi
 ) : AbstractTransactionStatusScreen(accountApi) {
     @PostMapping
     fun index(
@@ -36,9 +36,9 @@ class TransactionSuccessScreen(
                     ),
                     toSectionWidget(
                         child = toTransactionStatusWidget(tx)
-                    ),
-                ),
-            ),
+                    )
+                )
+            )
         ).toWidget()
     }
 }

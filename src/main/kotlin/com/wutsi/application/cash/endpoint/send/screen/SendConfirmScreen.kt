@@ -43,7 +43,7 @@ class SendConfirmScreen(
     private val accountApi: WutsiAccountApi,
     private val idempotencyKeyGenerator: IdempotencyKeyGenerator,
 
-    @Value("\${wutsi.application.login-url}") private val loginUrl: String,
+    @Value("\${wutsi.application.login-url}") private val loginUrl: String
 ) : AbstractQuery() {
     @PostMapping
     fun index(
@@ -121,7 +121,7 @@ class SendConfirmScreen(
                         value = amount,
                         currency = tenant.currencySymbol,
                         numberFormat = tenant.numberFormat,
-                        color = Theme.COLOR_PRIMARY,
+                        color = Theme.COLOR_PRIMARY
                     ),
                     toFeeDetailsWidget(fees, fmt, Page.SEND_CONFIRM),
                     Container(
@@ -132,12 +132,12 @@ class SendConfirmScreen(
                             caption = getText("page.send.confirm.button.submit", arrayOf(fmt.format(amount))),
                             action = Action(
                                 type = ActionType.Route,
-                                url = urlBuilder.build(loginUrl, getSubmitUrl(amount, recipient)),
+                                url = urlBuilder.build(loginUrl, getSubmitUrl(amount, recipient))
                             )
                         )
                     )
                 )
-            ),
+            )
         ).toWidget()
     }
 
@@ -172,7 +172,7 @@ class SendConfirmScreen(
                     child = Text(
                         caption = getText("page.send.confirm.recipient-not-found"),
                         alignment = TextAlignment.Center,
-                        size = Theme.TEXT_SIZE_X_LARGE,
+                        size = Theme.TEXT_SIZE_X_LARGE
                     )
                 ),
                 Text(
@@ -184,7 +184,7 @@ class SendConfirmScreen(
                     child = Text(
                         caption = getText("page.send.confirm.invite", arrayOf(tenant.name)),
                         alignment = TextAlignment.Center,
-                        size = Theme.TEXT_SIZE_X_LARGE,
+                        size = Theme.TEXT_SIZE_X_LARGE
                     )
                 ),
                 Container(
@@ -202,9 +202,9 @@ class SendConfirmScreen(
                             )
                         )
                     )
-                ),
+                )
             )
-        ),
+        )
     ).toWidget()
 
     private fun findRecipient(phoneNumber: String): Account? {

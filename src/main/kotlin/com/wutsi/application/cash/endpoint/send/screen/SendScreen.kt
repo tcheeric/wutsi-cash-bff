@@ -37,7 +37,7 @@ class SendScreen : AbstractQuery() {
                 elevation = 0.0,
                 backgroundColor = Theme.COLOR_PRIMARY,
                 foregroundColor = Theme.COLOR_WHITE,
-                title = getText("page.send.app-bar.title", arrayOf(balanceText)),
+                title = getText("page.send.app-bar.title", arrayOf(balanceText))
             ),
             child = Column(
                 mainAxisAlignment = MainAxisAlignment.center,
@@ -55,7 +55,7 @@ class SendScreen : AbstractQuery() {
                                     numberFormat = tenant.numberFormat,
                                     value = 0,
                                     keyboardButtonSize = 70.0
-                                ),
+                                )
                             ),
                             Container(
                                 padding = 10.0,

@@ -49,6 +49,16 @@
                         "value": "yyyyy"
                       },
                       "children": []
+                    },
+                    {
+                      "type": "DropdownMenuItem",
+                      "attributes": {
+                        "caption": "xxxx2222",
+                        "icon": "https://www.goole.com/images/waf.png",
+                        "enabled": true,
+                        "value": "zzzz"
+                      },
+                      "children": []
                     }
                   ]
                 }

@@ -18,7 +18,10 @@ class CashinAmountCommand(
     private val idempotencyKeyGenerator: IdempotencyKeyGenerator
 ) : AbstractCommand() {
     @PostMapping
-    fun index(@RequestBody @Valid request: CashinRequest): Action {
+    fun index(
+        @RequestBody @Valid
+        request: CashinRequest
+    ): Action {
         logger.add("amount", request.amount)
         logger.add("payment_token", request.paymentToken)
 
