@@ -267,8 +267,8 @@ class TransactionScreen(
                 ?: "",
             leading = paymentMethod?.let {
                 Image(
-                    width = 48.0,
-                    height = 48.0,
+                    width = 32.0,
+                    height = 32.0,
                     url = getLogoUrl(tenant, it) ?: ""
                 )
             }
@@ -304,7 +304,7 @@ class TransactionScreen(
         Row(
             children = listOf(
                 Flexible(
-                    flex = 2,
+                    flex = 3,
                     child = Container(
                         padding = 10.0,
                         child = Text(
@@ -315,7 +315,7 @@ class TransactionScreen(
                     )
                 ),
                 Flexible(
-                    flex = 3,
+                    flex = 10,
                     child = value
                 )
             )

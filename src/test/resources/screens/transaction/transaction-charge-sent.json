@@ -45,7 +45,7 @@
                         {
                           "type": "Flexible",
                           "attributes": {
-                            "flex": 2,
+                            "flex": 3,
                             "fit": "Tight"
                           },
                           "children": [
@@ -71,7 +71,7 @@
                         {
                           "type": "Flexible",
                           "attributes": {
-                            "flex": 3,
+                            "flex": 10,
                             "fit": "Tight"
                           },
                           "children": [
@@ -101,7 +101,7 @@
                         {
                           "type": "Flexible",
                           "attributes": {
-                            "flex": 2,
+                            "flex": 3,
                             "fit": "Tight"
                           },
                           "children": [
@@ -127,7 +127,7 @@
                         {
                           "type": "Flexible",
                           "attributes": {
-                            "flex": 3,
+                            "flex": 10,
                             "fit": "Tight"
                           },
                           "children": [
@@ -165,7 +165,7 @@
                         {
                           "type": "Flexible",
                           "attributes": {
-                            "flex": 2,
+                            "flex": 3,
                             "fit": "Tight"
                           },
                           "children": [
@@ -191,7 +191,7 @@
                         {
                           "type": "Flexible",
                           "attributes": {
-                            "flex": 3,
+                            "flex": 10,
                             "fit": "Tight"
                           },
                           "children": [
@@ -229,7 +229,7 @@
                         {
                           "type": "Flexible",
                           "attributes": {
-                            "flex": 2,
+                            "flex": 3,
                             "fit": "Tight"
                           },
                           "children": [
@@ -255,7 +255,7 @@
                         {
                           "type": "Flexible",
                           "attributes": {
-                            "flex": 3,
+                            "flex": 10,
                             "fit": "Tight"
                           },
                           "children": [
@@ -295,7 +295,7 @@
                         {
                           "type": "Flexible",
                           "attributes": {
-                            "flex": 2,
+                            "flex": 3,
                             "fit": "Tight"
                           },
                           "children": [
@@ -321,7 +321,7 @@
                         {
                           "type": "Flexible",
                           "attributes": {
-                            "flex": 3,
+                            "flex": 10,
                             "fit": "Tight"
                           },
                           "children": [
@@ -359,7 +359,7 @@
                         {
                           "type": "Flexible",
                           "attributes": {
-                            "flex": 2,
+                            "flex": 3,
                             "fit": "Tight"
                           },
                           "children": [
@@ -385,7 +385,7 @@
                         {
                           "type": "Flexible",
                           "attributes": {
-                            "flex": 3,
+                            "flex": 10,
                             "fit": "Tight"
                           },
                           "children": [
@@ -423,7 +423,7 @@
                         {
                           "type": "Flexible",
                           "attributes": {
-                            "flex": 2,
+                            "flex": 3,
                             "fit": "Tight"
                           },
                           "children": [
@@ -449,7 +449,7 @@
                         {
                           "type": "Flexible",
                           "attributes": {
-                            "flex": 3,
+                            "flex": 10,
                             "fit": "Tight"
                           },
                           "children": [
@@ -501,7 +501,7 @@
                         {
                           "type": "Flexible",
                           "attributes": {
-                            "flex": 2,
+                            "flex": 3,
                             "fit": "Tight"
                           },
                           "children": [
@@ -527,7 +527,7 @@
                         {
                           "type": "Flexible",
                           "attributes": {
-                            "flex": 3,
+                            "flex": 10,
                             "fit": "Tight"
                           },
                           "children": [
@@ -567,7 +567,7 @@
                         {
                           "type": "Flexible",
                           "attributes": {
-                            "flex": 2,
+                            "flex": 3,
                             "fit": "Tight"
                           },
                           "children": [
@@ -593,7 +593,7 @@
                         {
                           "type": "Flexible",
                           "attributes": {
-                            "flex": 3,
+                            "flex": 10,
                             "fit": "Tight"
                           },
                           "children": [
@@ -633,7 +633,7 @@
                         {
                           "type": "Flexible",
                           "attributes": {
-                            "flex": 2,
+                            "flex": 3,
                             "fit": "Tight"
                           },
                           "children": [
@@ -659,7 +659,7 @@
                         {
                           "type": "Flexible",
                           "attributes": {
-                            "flex": 3,
+                            "flex": 10,
                             "fit": "Tight"
                           },
                           "children": [
