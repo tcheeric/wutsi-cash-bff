@@ -9,6 +9,7 @@ import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
 import com.wutsi.flutter.sdui.Divider
 import com.wutsi.flutter.sdui.Icon
+import com.wutsi.flutter.sdui.IconButton
 import com.wutsi.flutter.sdui.Input
 import com.wutsi.flutter.sdui.MoneyText
 import com.wutsi.flutter.sdui.Row
@@ -63,7 +64,16 @@ class CashoutConfirmScreen(
                 elevation = 0.0,
                 backgroundColor = Theme.COLOR_WHITE,
                 foregroundColor = Theme.COLOR_BLACK,
-                title = getText("page.cashout.confirm.app-bar.title", arrayOf(fmt.format(balance.value)))
+                title = getText("page.cashout.confirm.app-bar.title", arrayOf(fmt.format(balance.value))),
+                actions = listOf(
+                    IconButton(
+                        icon = Theme.ICON_CANCEL,
+                        action = Action(
+                            type = ActionType.Route,
+                            url = "route:/~"
+                        )
+                    )
+                )
             ),
             child = Container(
                 alignment = Center,

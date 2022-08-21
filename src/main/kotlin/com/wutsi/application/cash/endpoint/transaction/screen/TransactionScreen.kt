@@ -4,6 +4,7 @@ import com.wutsi.application.cash.endpoint.AbstractQuery
 import com.wutsi.application.cash.endpoint.Page
 import com.wutsi.application.shared.Theme
 import com.wutsi.application.shared.service.DateTimeUtil
+import com.wutsi.application.shared.ui.Avatar
 import com.wutsi.flutter.sdui.Action
 import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Column
@@ -229,9 +230,9 @@ class TransactionScreen(
         if (tx.type == TransactionType.CASHIN.name)
             toPaymentProvideWidget(tx, paymentMethods, tenant)
         else if (tx.type == TransactionType.CASHOUT.name)
-            accounts[tx.accountId]?.let { toAccountWidget(it, null) } ?: Container()
+            accounts[tx.accountId]?.let { toAccountWidget(it) } ?: Container()
         else
-            accounts[tx.accountId]?.let { toAccountWidget(it, paymentMethods[tx.paymentMethodToken]) } ?: Container()
+            accounts[tx.accountId]?.let { toAccountWidget(it) } ?: Container()
 
     private fun toRecipientWidget(
         tx: Transaction,
@@ -240,11 +241,11 @@ class TransactionScreen(
         tenant: Tenant
     ): WidgetAware =
         if (tx.type == TransactionType.CASHIN.name)
-            accounts[tx.accountId]?.let { toAccountWidget(it, null) } ?: Container()
+            accounts[tx.accountId]?.let { toAccountWidget(it) } ?: Container()
         else if (tx.type == TransactionType.CASHOUT.name)
             toPaymentProvideWidget(tx, paymentMethods, tenant)
         else
-            accounts[tx.recipientId]?.let { toAccountWidget(it, null) } ?: Container()
+            accounts[tx.recipientId]?.let { toAccountWidget(it) } ?: Container()
 
     private fun toOrderWidget(orderId: String): WidgetAware =
         ListItem(
@@ -262,9 +263,7 @@ class TransactionScreen(
     ): WidgetAware {
         val paymentMethod = paymentMethods[tx.paymentMethodToken]
         return ListItem(
-            caption = paymentMethod?.number
-                ?: paymentMethod?.maskedNumber
-                ?: "",
+            caption = paymentMethod?.maskedNumber ?: "",
             leading = paymentMethod?.let {
                 Image(
                     width = 32.0,
@@ -275,11 +274,14 @@ class TransactionScreen(
         )
     }
 
-    private fun toAccountWidget(account: AccountSummary, paymentMethod: PaymentMethodSummary?): WidgetAware =
+    private fun toAccountWidget(account: AccountSummary): WidgetAware =
         ListItem(
             caption = account.displayName ?: "",
-            subCaption = paymentMethod?.phone?.number,
             trailing = Icon(Theme.ICON_CHEVRON_RIGHT),
+            leading = Avatar(
+                model = sharedUIMapper.toAccountModel(account),
+                radius = 16.0
+            ),
             action = Action(
                 type = ActionType.Route,
                 url = urlBuilder.build(shellUrl, "profile?id=${account.id}")

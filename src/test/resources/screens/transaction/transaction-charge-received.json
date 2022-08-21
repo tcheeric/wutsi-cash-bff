@@ -541,6 +541,23 @@
                                     "code": "e15f"
                                   },
                                   "children": []
+                                },
+                                "leading": {
+                                  "type": "CircleAvatar",
+                                  "attributes": {
+                                    "radius": 16.0
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "Text",
+                                      "attributes": {
+                                        "caption": "N1",
+                                        "bold": true,
+                                        "size": 14.0
+                                      },
+                                      "children": []
+                                    }
+                                  ]
                                 }
                               },
                               "children": [],
@@ -607,6 +624,23 @@
                                     "code": "e15f"
                                   },
                                   "children": []
+                                },
+                                "leading": {
+                                  "type": "CircleAvatar",
+                                  "attributes": {
+                                    "radius": 16.0
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "Text",
+                                      "attributes": {
+                                        "caption": "N1",
+                                        "bold": true,
+                                        "size": 14.0
+                                      },
+                                      "children": []
+                                    }
+                                  ]
                                 }
                               },
                               "children": [],
