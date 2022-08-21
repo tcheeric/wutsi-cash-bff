@@ -50,7 +50,6 @@ internal class CashinConfirmScreenTest : AbstractEndpointTest() {
                 provider = "MTN",
                 type = PaymentMethodType.MOBILE.name,
                 maskedNumber = "xxxx9999",
-                number = "+237670000001",
                 phone = Phone(
                     number = "+237670000001"
                 )

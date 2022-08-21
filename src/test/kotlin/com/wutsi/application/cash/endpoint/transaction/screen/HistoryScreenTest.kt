@@ -46,11 +46,10 @@ internal class HistoryScreenTest : AbstractEndpointTest() {
         doReturn(SearchTransactionResponse(txs)).whenever(paymentApi).searchTransaction(any())
 
         val paymentMethods = listOf(
-            createPaymentMethodSummary("A", "11111", "+12379711111"),
+            createPaymentMethodSummary("A", "11111"),
             createPaymentMethodSummary(
                 "B",
                 "22222",
-                "0022222",
                 type = PaymentMethodType.BANK,
                 provider = PaymentMethodProvider.WAF
             ),
@@ -107,13 +106,11 @@ internal class HistoryScreenTest : AbstractEndpointTest() {
     private fun createPaymentMethodSummary(
         token: String,
         maskedNumber: String,
-        number: String? = null,
         type: PaymentMethodType = PaymentMethodType.MOBILE,
         provider: PaymentMethodProvider = PaymentMethodProvider.MTN
     ) = PaymentMethodSummary(
         token = token,
         maskedNumber = maskedNumber,
-        number = number,
         type = type.name,
         provider = provider.name
     )

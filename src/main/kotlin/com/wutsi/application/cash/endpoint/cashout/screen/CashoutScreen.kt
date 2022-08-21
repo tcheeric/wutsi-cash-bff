@@ -62,7 +62,7 @@ class CashoutScreen(
                                     hint = getText("page.cashout.payment-token.hint"),
                                     children = paymentMethods.map {
                                         DropdownMenuItem(
-                                            caption = formattedAccountNumber(it) ?: it.maskedNumber,
+                                            caption = formattedAccountNumber(it),
                                             value = it.token,
                                             icon = getLogoUrl(tenant, it)
                                         )

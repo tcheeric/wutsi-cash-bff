@@ -188,11 +188,15 @@ abstract class AbstractEndpoint {
             "+$tmp"
     }
 
-    protected fun formattedAccountNumber(paymentMethod: PaymentMethodSummary): String? =
+    protected fun formattedAccountNumber(paymentMethod: PaymentMethod): String =
         if (paymentMethod.type == PaymentMethodType.MOBILE.name)
             formattedPhoneNumber(paymentMethod.phone?.number, paymentMethod.phone?.country)
+                ?: paymentMethod.maskedNumber
         else
-            paymentMethod.number
+            paymentMethod.maskedNumber
+
+    protected fun formattedAccountNumber(paymentMethod: PaymentMethodSummary): String =
+        paymentMethod.maskedNumber
 
     protected fun formattedPhoneNumber(phoneNumber: String?, country: String? = null): String? {
         if (phoneNumber == null)

@@ -94,7 +94,7 @@ class CashinConfirmScreen(
                                             ),
                                             Container(padding = 5.0),
                                             Text(
-                                                caption = paymentMethod.number ?: paymentMethod.maskedNumber,
+                                                caption = formattedAccountNumber(paymentMethod),
                                                 size = Theme.TEXT_SIZE_LARGE
                                             )
                                         )
