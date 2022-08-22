@@ -22,6 +22,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.server.LocalServerPort
 import java.net.URLEncoder
 import kotlin.test.assertEquals
+import kotlin.test.assertNull
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 internal class CashinCommandTest : AbstractEndpointTest() {
@@ -55,6 +56,32 @@ internal class CashinCommandTest : AbstractEndpointTest() {
         assertEquals(10000.0, request.firstValue.amount)
         assertEquals("xxxx", request.firstValue.paymentMethodToken)
         assertEquals("123", request.firstValue.idempotencyKey)
+        assertNull(request.firstValue.cvv)
+
+        val action = response.body!!
+        assertEquals(ActionType.Route, action.type)
+        assertEquals("http://localhost:0/transaction/success?transaction-id=111", action.url)
+    }
+
+    @Test
+    fun successWithCVV() {
+        // GIVEN
+        val resp = CreateCashinResponse(id = "111", status = Status.SUCCESSFUL.name)
+        doReturn(resp).whenever(paymentApi).createCashin(any())
+
+        // WHEN
+        val response = rest.postForEntity("$url&cvv=019", null, Action::class.java)
+
+        // THEN
+        assertEquals(200, response.statusCodeValue)
+
+        val request = argumentCaptor<CreateCashinRequest>()
+        verify(paymentApi).createCashin(request.capture())
+        assertEquals("XAF", request.firstValue.currency)
+        assertEquals(10000.0, request.firstValue.amount)
+        assertEquals("xxxx", request.firstValue.paymentMethodToken)
+        assertEquals("123", request.firstValue.idempotencyKey)
+        assertEquals("019", request.firstValue.cvv)
 
         val action = response.body!!
         assertEquals(ActionType.Route, action.type)
@@ -82,6 +109,7 @@ internal class CashinCommandTest : AbstractEndpointTest() {
         assertEquals(10000.0, request.firstValue.amount)
         assertEquals("xxxx", request.firstValue.paymentMethodToken)
         assertEquals("123", request.firstValue.idempotencyKey)
+        assertNull(request.firstValue.cvv)
 
         val action = response.body!!
         assertEquals(ActionType.Route, action.type)
@@ -106,6 +134,7 @@ internal class CashinCommandTest : AbstractEndpointTest() {
         assertEquals(10000.0, request.firstValue.amount)
         assertEquals("xxxx", request.firstValue.paymentMethodToken)
         assertEquals("123", request.firstValue.idempotencyKey)
+        assertNull(request.firstValue.cvv)
 
         val action = response.body!!
         val error = getText("prompt.error.unexpected-error")

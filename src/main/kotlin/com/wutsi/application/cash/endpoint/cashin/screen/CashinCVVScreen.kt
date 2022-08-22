@@ -8,6 +8,7 @@ import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
 import com.wutsi.flutter.sdui.Divider
+import com.wutsi.flutter.sdui.Form
 import com.wutsi.flutter.sdui.Icon
 import com.wutsi.flutter.sdui.IconButton
 import com.wutsi.flutter.sdui.Input
@@ -19,12 +20,12 @@ import com.wutsi.flutter.sdui.Widget
 import com.wutsi.flutter.sdui.enums.ActionType
 import com.wutsi.flutter.sdui.enums.Alignment.Center
 import com.wutsi.flutter.sdui.enums.CrossAxisAlignment
+import com.wutsi.flutter.sdui.enums.InputType
 import com.wutsi.flutter.sdui.enums.InputType.Submit
 import com.wutsi.flutter.sdui.enums.MainAxisAlignment
 import com.wutsi.platform.account.WutsiAccountApi
 import com.wutsi.platform.payment.dto.ComputeFeesRequest
 import com.wutsi.platform.payment.entity.TransactionType
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
@@ -32,18 +33,15 @@ import org.springframework.web.bind.annotation.RestController
 import java.text.DecimalFormat
 
 @RestController
-@RequestMapping("/cashin/confirm")
-class CashinConfirmScreen(
-    private val accountApi: WutsiAccountApi,
-
-    @Value("\${wutsi.application.login-url}") private val loginUrl: String
+@RequestMapping("/cashin/cvv")
+class CashinCVVScreen(
+    private val accountApi: WutsiAccountApi
 ) : AbstractQuery() {
     @PostMapping
     fun index(
         @RequestParam amount: Double,
         @RequestParam("payment-token") paymentToken: String,
-        @RequestParam("idempotency-key") idempotencyKey: String,
-        @RequestParam(required = false) cvv: String? = null
+        @RequestParam("idempotency-key") idempotencyKey: String
     ): Widget {
         val accountId = securityContext.currentAccountId()
         val tenant = tenantProvider.get()
@@ -60,12 +58,12 @@ class CashinConfirmScreen(
         ).fee
 
         return Screen(
-            id = Page.CASHIN_CONFIRM,
+            id = Page.CASHIN_CVV,
             appBar = AppBar(
                 elevation = 0.0,
                 backgroundColor = Theme.COLOR_WHITE,
                 foregroundColor = Theme.COLOR_BLACK,
-                title = getText("page.cashin.confirm.app-bar.title", arrayOf(fmt.format(balance.value))),
+                title = getText("page.cashin.cvv.app-bar.title", arrayOf(fmt.format(balance.value))),
                 actions = listOf(
                     IconButton(
                         icon = Theme.ICON_CANCEL,
@@ -114,21 +112,54 @@ class CashinConfirmScreen(
                             )
                         ),
                         toFeeDetailsWidget(fees, fmt, Page.CASHIN_CONFIRM),
-                        Container(padding = 20.0),
-                        Container(
-                            padding = 10.0,
-                            child = Input(
-                                name = "command",
-                                type = Submit,
-                                caption = getText(
-                                    "page.cashin.confirm.button.submit",
-                                    arrayOf(fmt.format(amount))
+
+                        Form(
+                            children = listOf(
+                                Container(
+                                    padding = 10.0,
+                                    child = Input(
+                                        name = "cvv",
+                                        maxLength = 3,
+                                        caption = getText("page.cashin.cvv.input.cvv"),
+                                        type = InputType.Number,
+                                        required = true
+                                    )
                                 ),
-                                action = Action(
-                                    type = ActionType.Route,
-                                    url = urlBuilder.build(
-                                        loginUrl,
-                                        getSubmitUrl(amount, paymentToken, idempotencyKey, cvv)
+                                Container(
+                                    padding = 10.0,
+                                    child = Column(
+                                        mainAxisAlignment = MainAxisAlignment.start,
+                                        crossAxisAlignment = CrossAxisAlignment.start,
+                                        children = listOf(
+                                            Text(
+                                                caption = getText("page.cashin.cvv.what-is-cvv-q"),
+                                                size = Theme.TEXT_SIZE_LARGE,
+                                                bold = true
+                                            ),
+                                            Text(
+                                                caption = getText("page.cashin.cvv.what-is-cvv-a")
+                                            )
+                                        )
+                                    )
+                                ),
+                                Container(
+                                    padding = 10.0,
+                                    child = Input(
+                                        name = "command",
+                                        type = Submit,
+                                        caption = getText(
+                                            "page.cashin.cvv.button.submit",
+                                            arrayOf(fmt.format(amount))
+                                        ),
+                                        action = Action(
+                                            type = ActionType.Command,
+                                            url = urlBuilder.build("/commands/cashin/cvv"),
+                                            parameters = mapOf(
+                                                "amount" to amount.toString(),
+                                                "payment-token" to paymentToken,
+                                                "idempotency-key" to idempotencyKey
+                                            )
+                                        )
                                     )
                                 )
                             )
@@ -137,24 +168,5 @@ class CashinConfirmScreen(
                 )
             )
         ).toWidget()
-    }
-
-    private fun getSubmitUrl(amount: Double, paymentToken: String, idempotencyKey: String, cvv: String?): String {
-        val me = accountApi.getAccount(securityContext.currentAccountId()).account
-        return "?phone=" + encodeURLParam(me.phone!!.number) +
-            "&dark-mode=true" +
-            "&screen-id=" + Page.CASHIN_PIN +
-            "&title=" + encodeURLParam(getText("page.cashin-pin.title")) +
-            "&sub-title=" + encodeURLParam(getText("page.cashin-pin.sub-title")) +
-            "&auth=false" +
-            "&dark-more=true" +
-            "&return-to-route=false" +
-            "&return-url=" + encodeURLParam(
-            urlBuilder.build(
-                "commands/cashin?amount=$amount&payment-token=$paymentToken" +
-                    "&idempotency-key=$idempotencyKey" +
-                    (cvv?.let { "&cvv=$it" } ?: "")
-            )
-        )
     }
 }

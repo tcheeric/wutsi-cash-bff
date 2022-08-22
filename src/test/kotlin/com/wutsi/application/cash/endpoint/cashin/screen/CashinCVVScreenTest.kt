@@ -18,7 +18,7 @@ import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.boot.test.web.server.LocalServerPort
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-internal class CashinConfirmScreenTest : AbstractEndpointTest() {
+internal class CashinCVVScreenTest : AbstractEndpointTest() {
     @LocalServerPort
     val port: Int = 0
 
@@ -27,18 +27,16 @@ internal class CashinConfirmScreenTest : AbstractEndpointTest() {
 
     private lateinit var url: String
     private val amount = 5000.0
-    private val fees = 50.0
     private val idempotencyKey = "11111-111111-222222-2222"
     private val token = "xxx"
+    private val fees = 50.0
 
     @BeforeEach
     override fun setUp() {
         super.setUp()
 
         url =
-            "http://localhost:$port/cashin/confirm?amount=$amount&payment-token=$token&idempotency-key=$idempotencyKey"
-
-        doReturn("123").whenever(idempotencyKeyGenerator).generate()
+            "http://localhost:$port/cashin/cvv?amount=$amount&payment-token=$token&idempotency-key=$idempotencyKey"
     }
 
     @Test
@@ -67,35 +65,6 @@ internal class CashinConfirmScreenTest : AbstractEndpointTest() {
         doReturn(ComputeFeesResponse(transactionFee)).whenever(paymentApi).computeFees(any())
 
         // THEN
-        assertEndpointEquals("/screens/cashin/confirm.json", url)
-    }
-
-    @Test
-    fun confirmWithCVV() {
-        // GIVEN
-        val response = GetPaymentMethodResponse(
-            paymentMethod = PaymentMethod(
-                token = "xxxxxx",
-                provider = "MTN",
-                type = PaymentMethodType.MOBILE.name,
-                maskedNumber = "xxxx9999",
-                phone = Phone(
-                    number = "+237670000001"
-                )
-            )
-        )
-        doReturn(response).whenever(accountApi).getPaymentMethod(any(), any())
-
-        val transactionFee = TransactionFee(
-            amount = amount,
-            fees = fees,
-            senderAmount = amount + fees,
-            recipientAmount = amount,
-            applyFeesToSender = true
-        )
-        doReturn(ComputeFeesResponse(transactionFee)).whenever(paymentApi).computeFees(any())
-
-        // THEN
-        assertEndpointEquals("/screens/cashin/confirm-cvv.json", "$url&cvv=019")
+        assertEndpointEquals("/screens/cashin/cvv.json", url)
     }
 }

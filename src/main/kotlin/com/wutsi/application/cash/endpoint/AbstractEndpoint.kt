@@ -34,6 +34,7 @@ import com.wutsi.platform.payment.WutsiPaymentApi
 import com.wutsi.platform.payment.core.ErrorCode
 import com.wutsi.platform.payment.core.Money
 import com.wutsi.platform.payment.dto.TransactionFee
+import com.wutsi.platform.tenant.dto.CreditCardType
 import com.wutsi.platform.tenant.dto.FinancialInstitution
 import com.wutsi.platform.tenant.dto.MobileCarrier
 import com.wutsi.platform.tenant.dto.Tenant
@@ -215,6 +216,9 @@ abstract class AbstractEndpoint {
     protected fun getFinantialInstitution(provider: String, tenant: Tenant): FinancialInstitution? =
         tenant.financialInstitutions.findLast { it.code.equals(provider, true) }
 
+    protected fun getCreditCardType(provider: String, tenant: Tenant): CreditCardType? =
+        tenant.creditCardTypes.findLast { it.code.equals(provider, true) }
+
     fun getLogoUrl(tenant: Tenant, paymentMethod: PaymentMethodSummary): String? {
         if (paymentMethod.type == PaymentMethodType.MOBILE.name) {
             val carrier = getMobileCarrier(paymentMethod.provider, tenant)
@@ -225,6 +229,11 @@ abstract class AbstractEndpoint {
             val financialInstitution = getFinantialInstitution(paymentMethod.provider, tenant)
             if (financialInstitution != null) {
                 return tenantProvider.logo(financialInstitution)
+            }
+        } else if (paymentMethod.type == PaymentMethodType.CREDIT_CARD.name) {
+            val creditCardType = getCreditCardType(paymentMethod.provider, tenant)
+            if (creditCardType != null) {
+                return tenantProvider.logo(creditCardType)
             }
         }
         return null
@@ -240,6 +249,11 @@ abstract class AbstractEndpoint {
             val financialInstitution = getFinantialInstitution(paymentMethod.provider, tenant)
             if (financialInstitution != null) {
                 return tenantProvider.logo(financialInstitution)
+            }
+        } else if (paymentMethod.type == PaymentMethodType.CREDIT_CARD.name) {
+            val creditCardType = getCreditCardType(paymentMethod.provider, tenant)
+            if (creditCardType != null) {
+                return tenantProvider.logo(creditCardType)
             }
         }
         return null

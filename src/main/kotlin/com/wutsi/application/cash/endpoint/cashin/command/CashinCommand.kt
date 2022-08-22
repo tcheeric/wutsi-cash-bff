@@ -18,14 +18,15 @@ class CashinCommand : AbstractCommand() {
     fun index(
         @RequestParam amount: Double,
         @RequestParam("payment-token") paymentToken: String,
-        @RequestParam(name = "idempotency-key") idempotencyKey: String
+        @RequestParam(name = "idempotency-key") idempotencyKey: String,
+        @RequestParam(required = false) cvv: String? = null
     ): Action {
         logger.add("amount", amount)
         logger.add("payment_token", paymentToken)
 
         // Cashin
         try {
-            val response = cashin(amount, paymentToken, idempotencyKey)
+            val response = cashin(amount, paymentToken, idempotencyKey, cvv)
             logger.add("transaction_id", response.id)
             logger.add("transaction_status", response.status)
 
@@ -50,13 +51,19 @@ class CashinCommand : AbstractCommand() {
         }
     }
 
-    private fun cashin(amount: Double, paymentToken: String, idempotencyKey: String): CreateCashinResponse =
+    private fun cashin(
+        amount: Double,
+        paymentToken: String,
+        idempotencyKey: String,
+        cvv: String?
+    ): CreateCashinResponse =
         paymentApi.createCashin(
             CreateCashinRequest(
                 paymentMethodToken = paymentToken,
                 amount = amount,
                 currency = tenantProvider.get().currency,
-                idempotencyKey = idempotencyKey
+                idempotencyKey = idempotencyKey,
+                cvv = cvv
             )
         )
 }
