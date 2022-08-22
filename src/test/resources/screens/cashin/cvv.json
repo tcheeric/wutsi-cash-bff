@@ -226,7 +226,7 @@
                       },
                       "children": [],
                       "action": {
-                        "type": "Route",
+                        "type": "Command",
                         "url": "http://localhost:0/commands/cashin/cvv",
                         "parameters": {
                           "amount": "5000.0",
