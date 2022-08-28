@@ -50,7 +50,8 @@
                 {
                   "type": "Container",
                   "attributes": {
-                    "alignment": "Center"
+                    "alignment": "Center",
+                    "padding": 10.0
                   },
                   "children": [
                     {
