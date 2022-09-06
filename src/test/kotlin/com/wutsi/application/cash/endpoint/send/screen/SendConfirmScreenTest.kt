@@ -10,6 +10,7 @@ import com.wutsi.platform.account.dto.AccountSummary
 import com.wutsi.platform.account.dto.GetAccountResponse
 import com.wutsi.platform.account.dto.Phone
 import com.wutsi.platform.account.dto.SearchAccountResponse
+import com.wutsi.platform.account.entity.AccountStatus
 import com.wutsi.platform.payment.dto.ComputeFeesResponse
 import com.wutsi.platform.payment.dto.TransactionFee
 import org.junit.jupiter.api.BeforeEach
@@ -64,7 +65,12 @@ internal class SendConfirmScreenTest : AbstractEndpointTest() {
 
     @Test
     fun recipientId() {
-        val account = Account(id = 111, displayName = "Ray Sponsible", phone = Phone(number = "+237999999999"))
+        val account = Account(
+            id = 111,
+            displayName = "Ray Sponsible",
+            phone = Phone(number = "+237999999999"),
+            status = AccountStatus.ACTIVE.name
+        )
         doReturn(GetAccountResponse(account)).whenever(accountApi).getAccount(any())
 
         val url = "http://localhost:$port/send/confirm?amount=$amount&recipient-id=55"

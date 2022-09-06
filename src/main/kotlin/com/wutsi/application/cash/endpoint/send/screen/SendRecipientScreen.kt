@@ -31,6 +31,7 @@ import com.wutsi.flutter.sdui.enums.TextAlignment
 import com.wutsi.platform.account.WutsiAccountApi
 import com.wutsi.platform.account.dto.AccountSummary
 import com.wutsi.platform.account.dto.SearchAccountRequest
+import com.wutsi.platform.account.entity.AccountStatus
 import com.wutsi.platform.contact.WutsiContactApi
 import com.wutsi.platform.contact.dto.ContactSummary
 import com.wutsi.platform.contact.dto.SearchContactRequest
@@ -171,6 +172,7 @@ class SendRecipientScreen(
         val accounts = accountApi.searchAccount(
             SearchAccountRequest(
                 ids = accountIds,
+                status = AccountStatus.ACTIVE.name,
                 limit = accountIds.size,
                 offset = 0
             )
