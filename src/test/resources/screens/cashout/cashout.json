@@ -132,7 +132,21 @@
       "title": "50,000 XAF",
       "elevation": 0.0,
       "backgroundColor": "#FFFFFF",
-      "foregroundColor": "#000000"
+      "foregroundColor": "#000000",
+      "automaticallyImplyLeading": false,
+      "actions": [
+        {
+          "type": "IconButton",
+          "attributes": {
+            "icon": "ef28"
+          },
+          "children": [],
+          "action": {
+            "type": "Route",
+            "url": "route:/~"
+          }
+        }
+      ]
     },
     "children": []
   }

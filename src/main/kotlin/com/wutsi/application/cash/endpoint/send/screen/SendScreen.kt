@@ -8,6 +8,7 @@ import com.wutsi.flutter.sdui.AppBar
 import com.wutsi.flutter.sdui.Column
 import com.wutsi.flutter.sdui.Container
 import com.wutsi.flutter.sdui.Form
+import com.wutsi.flutter.sdui.IconButton
 import com.wutsi.flutter.sdui.Input
 import com.wutsi.flutter.sdui.MoneyWithKeyboard
 import com.wutsi.flutter.sdui.Screen
@@ -37,7 +38,14 @@ class SendScreen : AbstractQuery() {
                 elevation = 0.0,
                 backgroundColor = Theme.COLOR_PRIMARY,
                 foregroundColor = Theme.COLOR_WHITE,
-                title = getText("page.send.app-bar.title", arrayOf(balanceText))
+                title = getText("page.send.app-bar.title", arrayOf(balanceText)),
+                actions = listOf(
+                    IconButton(
+                        icon = Theme.ICON_CANCEL,
+                        action = gotoHome()
+                    )
+                ),
+                automaticallyImplyLeading = false
             ),
             child = Column(
                 mainAxisAlignment = MainAxisAlignment.center,

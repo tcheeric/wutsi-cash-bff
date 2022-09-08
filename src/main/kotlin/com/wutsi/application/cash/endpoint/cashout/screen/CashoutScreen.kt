@@ -10,6 +10,7 @@ import com.wutsi.flutter.sdui.Container
 import com.wutsi.flutter.sdui.DropdownButton
 import com.wutsi.flutter.sdui.DropdownMenuItem
 import com.wutsi.flutter.sdui.Form
+import com.wutsi.flutter.sdui.IconButton
 import com.wutsi.flutter.sdui.Input
 import com.wutsi.flutter.sdui.MoneyWithKeyboard
 import com.wutsi.flutter.sdui.Screen
@@ -45,7 +46,14 @@ class CashoutScreen(
                 elevation = 0.0,
                 backgroundColor = Theme.COLOR_WHITE,
                 foregroundColor = Theme.COLOR_BLACK,
-                title = getText("page.cashout.app-bar.title", arrayOf(balanceText))
+                title = getText("page.cashout.app-bar.title", arrayOf(balanceText)),
+                actions = listOf(
+                    IconButton(
+                        icon = Theme.ICON_CANCEL,
+                        action = gotoHome()
+                    )
+                ),
+                automaticallyImplyLeading = false
             ),
             child = Column(
                 mainAxisAlignment = MainAxisAlignment.start,
