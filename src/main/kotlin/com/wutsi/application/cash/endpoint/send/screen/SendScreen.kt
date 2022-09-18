@@ -84,8 +84,7 @@ class SendScreen : AbstractQuery() {
                         )
                     )
                 )
-            ),
-            bottomNavigationBar = bottomNavigationBar()
+            )
         ).toWidget()
     }
 }

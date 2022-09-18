@@ -91,51 +91,5 @@
       ]
     },
     "children": []
-  },
-  "bottomNavigationBar": {
-    "type": "BottomNavigationBar",
-    "attributes": {
-      "background": "#1D7EDF",
-      "selectedItemColor": "#FFFFFF",
-      "unselectedItemColor": "#FFFFFF"
-    },
-    "children": [
-      {
-        "type": "BottomNavigationBarItem",
-        "attributes": {
-          "icon": "f107",
-          "caption": "Home"
-        },
-        "children": [],
-        "action": {
-          "type": "Route",
-          "url": "route:/~"
-        }
-      },
-      {
-        "type": "BottomNavigationBarItem",
-        "attributes": {
-          "icon": "f27b",
-          "caption": "Me"
-        },
-        "children": [],
-        "action": {
-          "type": "Route",
-          "url": "https://wutsi-gateway-test.herokuapp.com/shell/profile"
-        }
-      },
-      {
-        "type": "BottomNavigationBarItem",
-        "attributes": {
-          "icon": "f36e",
-          "caption": "Settings"
-        },
-        "children": [],
-        "action": {
-          "type": "Route",
-          "url": "https://wutsi-gateway-test.herokuapp.com/shell/settings"
-        }
-      }
-    ]
   }
 }

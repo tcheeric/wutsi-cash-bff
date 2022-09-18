@@ -75,6 +75,9 @@ abstract class AbstractEndpoint {
     @Value("\${wutsi.application.shell-url}")
     protected lateinit var shellUrl: String
 
+    @Value("\${wutsi.application.store-url}")
+    protected lateinit var storeUrl: String
+
     @Autowired
     protected lateinit var objectMapper: ObjectMapper
 
@@ -191,7 +194,7 @@ abstract class AbstractEndpoint {
 
     protected fun formattedAccountNumber(paymentMethod: PaymentMethod): String =
         if (paymentMethod.type == PaymentMethodType.MOBILE.name)
-            formattedPhoneNumber(paymentMethod.phone?.number, paymentMethod.phone?.country)
+            formattedPhoneNumber(paymentMethod.phone.number, paymentMethod.phone.country)
                 ?: paymentMethod.maskedNumber
         else
             paymentMethod.maskedNumber
@@ -276,6 +279,7 @@ abstract class AbstractEndpoint {
         model = sharedUIMapper.toBottomNavigationBarModel(
             shellUrl = shellUrl,
             cashUrl = "",
+            storeUrl = storeUrl,
             urlBuilder = urlBuilder
         )
     ).toBottomNavigationBar()

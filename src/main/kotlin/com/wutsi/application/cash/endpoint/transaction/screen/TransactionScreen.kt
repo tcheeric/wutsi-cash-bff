@@ -32,7 +32,6 @@ import com.wutsi.platform.payment.core.Status
 import com.wutsi.platform.payment.dto.Transaction
 import com.wutsi.platform.payment.entity.TransactionType
 import com.wutsi.platform.tenant.dto.Tenant
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.i18n.LocaleContextHolder
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -44,9 +43,7 @@ import java.time.format.DateTimeFormatter
 @RestController
 @RequestMapping("/transaction")
 class TransactionScreen(
-    private val accountApi: WutsiAccountApi,
-
-    @Value("\${wutsi.application.store-url}") private val storeUrl: String
+    private val accountApi: WutsiAccountApi
 ) : AbstractQuery() {
     @PostMapping
     fun index(@RequestParam id: String): Widget {
