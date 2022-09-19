@@ -75,10 +75,12 @@ class HistoryScreen(
         if (txs.isEmpty()) {
             return Container().toWidget()
         }
+
         return Column(
             mainAxisAlignment = MainAxisAlignment.start,
             crossAxisAlignment = CrossAxisAlignment.start,
             children = listOf(
+                Container(padding = 10.0),
                 Container(
                     padding = 10.0,
                     child = Text(
