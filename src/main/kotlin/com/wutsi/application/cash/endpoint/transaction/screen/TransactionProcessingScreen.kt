@@ -49,7 +49,7 @@ class TransactionProcessingScreen(
                                 ),
                                 Timeout(
                                     url = urlBuilder.build("widgets/transaction/status?transaction-id=$transactionId"),
-                                    delay = 15
+                                    delay = 5
                                 )
                             )
                         )
