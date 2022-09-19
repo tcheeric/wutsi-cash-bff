@@ -16,6 +16,7 @@ import com.wutsi.flutter.sdui.Text
 import com.wutsi.flutter.sdui.Widget
 import com.wutsi.flutter.sdui.WidgetAware
 import com.wutsi.flutter.sdui.enums.Alignment
+import com.wutsi.flutter.sdui.enums.CrossAxisAlignment
 import com.wutsi.flutter.sdui.enums.MainAxisAlignment
 import com.wutsi.flutter.sdui.enums.TextAlignment
 import com.wutsi.platform.account.WutsiAccountApi
@@ -39,6 +40,7 @@ class HistoryScreen(
         val limit = 30
         val tenant = tenantProvider.get()
         val balance = getBalance(tenant)
+        val txs = findTransactions(limit)
 
         return Screen(
             id = Page.HISTORY,
@@ -59,15 +61,41 @@ class HistoryScreen(
                     ),
                     Text(getText("page.history.title", arrayOf(limit))),
                     Divider(color = Theme.COLOR_DIVIDER),
-                    transactionsWidget(limit, tenant)
+                    transactionsWidget(txs, tenant)
                 )
             ),
             bottomNavigationBar = bottomNavigationBar()
         ).toWidget()
     }
 
-    private fun transactionsWidget(limit: Int, tenant: Tenant): WidgetAware {
-        val txs = findTransactions(limit)
+    @PostMapping("/widget")
+    fun widget(): Widget {
+        val tenant = tenantProvider.get()
+        val txs = findTransactions(3)
+        if (txs.isEmpty()) {
+            return Container().toWidget()
+        }
+        return Column(
+            mainAxisAlignment = MainAxisAlignment.start,
+            crossAxisAlignment = CrossAxisAlignment.start,
+            children = listOf(
+                Container(
+                    padding = 10.0,
+                    child = Text(
+                        bold = true,
+                        caption = getText("page.history.recent-transactions")
+                    )
+                ),
+                Divider(
+                    height = 1.0,
+                    color = Theme.COLOR_DIVIDER
+                ),
+                transactionsWidget(txs, tenant)
+            )
+        ).toWidget()
+    }
+
+    private fun transactionsWidget(txs: List<TransactionSummary>, tenant: Tenant): WidgetAware {
         if (txs.isEmpty())
             return Container(
                 padding = 20.0,
